@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using SGVRestaurantProject.Models;
 
-namespace SGVRestaurantProject.Models
+namespace SGVRestaurantProject.Data
 {
     public partial class SVGRestaurantContext : DbContext
     {

@@ -1,0 +1,42 @@
+﻿@model SGVRestaurantProject.Models.BanquetMenu
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>BanquetMenu</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BanquetName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BanquetName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RestaurantId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RestaurantId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BanquetCost)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BanquetCost)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BanquetAvailability)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BanquetAvailability)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.BanquetId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
