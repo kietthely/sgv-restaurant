@@ -45,8 +45,9 @@ namespace SGVRestaurantProject.Controllers
         }
 
         // GET: MenuItems/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
+            ViewBag.banquetId = id;
             return View();
         }
 

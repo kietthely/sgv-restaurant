@@ -1,0 +1,18 @@
+﻿@model SelectList
+
+
+<div class="bg-light py-2 mb-2">
+    <h2>Booking Times</h2>
+</div>
+<form method="post" asp-controller="BookingTimes" asp-action="Index">
+    <div class="row mb-3">
+        <div class="col-4">
+            <select name="timeslot" asp-items="@Model" class="form-select">
+                <option value="">Select a time slot...</option>
+            </select>
+        </div>
+        <div class="col-2">
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+        </div>
+    </div>
+</form>

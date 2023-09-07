@@ -46,10 +46,24 @@ namespace SGVRestaurantProject.Controllers
         }
 
         // GET: BanquetAndMenuItems/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
-            ViewData["BanquetId"] = new SelectList(_context.BanquetMenus, "BanquetId", "BanquetId");
-            ViewData["ItemId"] = new SelectList(_context.MenuItems, "ItemId", "ItemId");
+
+            var itemName = _context.MenuItems
+        .Where(m => m.ItemId == id)
+        .Select(i => i.ItemName)
+        .FirstOrDefault();
+            ViewData["BanquetId"] = new SelectList(_context.BanquetMenus, "BanquetId", "BanquetName");
+            ViewData["ItemName"] = itemName;
+
+            var query = _context.RestaurantBanquetMenus
+                .Where(rb => rb.BanquetId == id)
+                .Select(rb => new
+                {
+                    BanquetId = rb.BanquetId,
+                    RestaurantId = rb.RestaurantId
+                })
+                .FirstOrDefault();
             return View();
         }
 

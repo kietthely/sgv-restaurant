@@ -25,7 +25,12 @@ namespace SGVRestaurantProject.Controllers
                           View(await _context.Restaurants.ToListAsync()) :
                           Problem("Entity set 'SVGRestaurantContext.Restaurants'  is null.");
         }
+        public async Task<IActionResult> RestaurantPage()
+        {
+            var query = _context.Restaurants;
 
+            return View(await query.ToListAsync());
+        }
         // GET: Restaurants/Details/5
         public async Task<IActionResult> Details(int? id)
         {

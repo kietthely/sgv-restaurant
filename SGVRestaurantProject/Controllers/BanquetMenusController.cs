@@ -34,12 +34,44 @@ namespace SGVRestaurantProject.Controllers
                 return NotFound();
             }
 
+            //var banquetMenuDetails = (from bm in _context.BanquetMenus
+            //                          join r in _context.Restaurants
+            //                          on bm.RestaurantId equals r.RestaurantId
+            //                          where bm.BanquetId == id
+            //                          select new
+            //                          {
+            //                              r.RestaurantName,
+            //                              bm.BanquetId,
+            //                              bm.BanquetName,
+            //                              bm.BanquetCost,
+            //                              bm.BanquetAvailability,
+            //                          });
+
             var banquetMenu = await _context.BanquetMenus
                 .FirstOrDefaultAsync(m => m.BanquetId == id);
+
             if (banquetMenu == null)
             {
                 return NotFound();
             }
+
+            //var restaurantName = _context.Restaurants
+            //    .Join(_context.BanquetMenus,
+            //    i => i.RestaurantId,
+            //    bm => bm.RestaurantId,
+            //    (i, bm) => new { restaurant = i, banquetMenu = bm })
+            //    .Select(p => new
+            //    { p.restaurant.RestaurantName });
+
+            //var restaurant = (from r in _context.Restaurants
+            //                  join bm in _context.BanquetMenus
+            //                  on r.RestaurantId equals bm.RestaurantId
+            //                  select new
+            //                  {
+            //                      r.RestaurantName,
+            //                  });
+
+            //ViewBag.Name = restaurantName.; Trying to get restaurant name to show up.
 
             return View(banquetMenu);
         }
@@ -49,6 +81,7 @@ namespace SGVRestaurantProject.Controllers
         {
             return View();
         }
+
 
         // POST: BanquetMenus/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.

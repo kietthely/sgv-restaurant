@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SGVRestaurantProject.Models.BanquetMenu>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Banquets";
 }
 
-<h1>Index</h1>
+<h1>Available banquets</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-outline-primary" asp-action="Create">Add new banquet</a>
 </p>
 <table class="table">
     <thead>
@@ -19,35 +19,53 @@
                 @Html.DisplayNameFor(model => model.RestaurantId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BanquetCost)
+                @*@Html.DisplayNameFor(model => model.BanquetCost)*@
+                Cost
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BanquetAvailability)
+                @*@Html.DisplayNameFor(model => model.BanquetAvailability)*@
+                Availability
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BanquetName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestaurantId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BanquetCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BanquetAvailability)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BanquetId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BanquetId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BanquetId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BanquetName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RestaurantId)
+                </td>
+                <td>
+                    &#36 @{
+                        var cost = item.BanquetCost > 0 ? item.BanquetCost : 0;
+
+
+                    }
+
+                    @Html.DisplayFor(modelItem => cost)
+
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.BanquetAvailability)*@
+                    @if (item.BanquetAvailability == true)
+                    {
+                        <p>Available</p>
+                    }
+                    else
+                    {
+                        <p>Not currently available</p>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.BanquetId">Edit</a>
+                    <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.BanquetId">Details</a>
+                    <a class="btn btn-outline-primary" asp-action="Delete" asp-route-id="@item.BanquetId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
