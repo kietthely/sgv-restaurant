@@ -1,4 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using SGVRestaurantProject.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<SVGRestaurantContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SGVRestaurantProject") ??
+    throw new InvalidOperationException("Connection string 'SvgRestaurantContext' not found")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
