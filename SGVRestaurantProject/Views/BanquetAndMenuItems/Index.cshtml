@@ -6,12 +6,10 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
+            <th>Restaurant Name</th>
             <th>
                 @Html.DisplayNameFor(model => model.Banquet)
             </th>
@@ -24,9 +22,11 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>@item.Banquet.Restaurant.RestaurantName</td>
             <td>
-                @Html.DisplayFor(modelItem => item.Banquet.BanquetId)
+                @Html.DisplayFor(modelItem =>item.Banquet.BanquetName)
             </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Item.ItemId)
             </td>
