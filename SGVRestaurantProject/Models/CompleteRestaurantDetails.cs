@@ -4,5 +4,7 @@
     {
         public Restaurant theRestaurant { get; set; }
         public List<RestaurantBanquetMenu> banquets { get; set; }
+        public List<BanquetMenu> banquetMenus { get; set; }
+        public List<BanquetAndMenuItem> bami { get; set; }
     }
 }

@@ -29,9 +29,9 @@
 <div>
 <ul>
     
-    @foreach (var restaurantBanquetMenu in Model.banquets)
+    @foreach (var rbm in Model.banquetMenus)
         {
-            <li>@restaurantBanquetMenu.Banquet.BanquetName</li>
+             <li>@rbm.BanquetName</li> 
         }
     </ul>
 </div>

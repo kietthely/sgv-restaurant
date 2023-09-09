@@ -36,17 +36,61 @@ namespace SGVRestaurantProject.Controllers
         // GET: Restaurants/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            //var query = _context.Restaurants
+            //    .Include(r => r.RestaurantBanquetMenus)
+            //    .Where(r => r.RestaurantId == id)
+            //    .Select(r => new CompleteRestaurantDetails
+            //    {
+            //        theRestaurant = r,
+            //        banquets = r.RestaurantBanquetMenus.ToList(),
+            //        banquetMenus = r.BanquetMenus.ToList() 
+            //    }).FirstOrDefaultAsync();
+            
+
+
             var query = _context.Restaurants
-                .Include(p => p.RestaurantBanquetMenus)
-                .Where(p => p.RestaurantId == id)
-                .Select(p => new CompleteRestaurantDetails
+                .Join(
+                    _context.RestaurantBanquetMenus,
+                    r => r.RestaurantId,
+                    rbm => rbm.RestaurantId,
+                    (r, rbm) => new {Restaurant = r, RestaurantBanquetMenu = rbm}
+                    )
+                .Join(
+                    _context.BanquetMenus,
+                    x => x.RestaurantBanquetMenu.BanquetId,
+                    bm => bm.BanquetId,
+                    (x, bm) => new {x.Restaurant, x.RestaurantBanquetMenu, BanquetMenu = bm
+                    })
+                .Join(
+                    _context.BanquetAndMenuItems,
+                    x => x.BanquetMenu.BanquetId,
+                    bami => bami.BanquetId,
+                    (x, bami) => new { x.Restaurant, x.RestaurantBanquetMenu, x.BanquetMenu, BanquetAndMenuItem = bami 
+                    })
+                .Join(
+                    _context.MenuItems,
+                    x => x.BanquetAndMenuItem.ItemId,
+                    mi => mi.ItemId,
+                    (x, mi) => new
+                    {
+                        Restaurant = x.Restaurant,
+                        RestaurantBanquetMenu = x.RestaurantBanquetMenu,
+                        BanquetMenu = x.BanquetMenu,
+                        BanquetAndMenuItem = x.BanquetAndMenuItem,
+                        menuitem = mi
+                    })
+                .Where(x => x.Restaurant.RestaurantId == id)
+                .Select(x => new
                 {
-                    theRestaurant = p,
-                    banquets = p.RestaurantBanquetMenus.ToList()
-                }).FirstOrDefaultAsync();
+                    Restaurant = x.Restaurant,
+                    RestaurantBanquetMenu = x.RestaurantBanquetMenu,
+                    BanquetMenu = x.BanquetMenu,
+                    BanquetAndMenuItem = x.BanquetAndMenuItem,
+                    MenuItem = x.menuitem
+                }).ToList();
 
 
-            return View(await query);
+            return View(query);
 
             //if (id == null || _context.Restaurants == null)
             //{
