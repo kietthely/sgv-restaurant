@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGVRestaurantProject.Models;
+using SGVRestaurantProject.Models.ViewModel;
+using static SGVRestaurantProject.Models.ViewModel.BanquetMenuViewModel;
 
 namespace SGVRestaurantProject.Controllers
 {
@@ -24,6 +26,57 @@ namespace SGVRestaurantProject.Controllers
               return _context.BanquetMenus != null ? 
                           View(await _context.BanquetMenus.ToListAsync()) :
                           Problem("Entity set 'SVGRestaurantContext.BanquetMenus'  is null.");
+        }
+
+        // GET: BanquetMenus/EditBanquetMenuItems/1
+        // This directs to a page where menu items are listed available to be deleted via a button.
+        public async Task<IActionResult> EditBanquetMenuItems(int? id)
+        {
+
+            var banquetMenu = _context.BanquetMenus
+            .Include(b => b.Restaurant)
+            .Include(b => b.BanquetAndMenuItems)
+            .ThenInclude(bam => bam.Item)
+            .FirstOrDefault(b => b.BanquetId == id);
+
+
+            if (banquetMenu == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new BanquetMenuViewModel
+            {
+                BanquetId = banquetMenu.BanquetId,
+                BanquetName = banquetMenu.BanquetName,
+                RestaurantId = banquetMenu.RestaurantId,
+                BanquetCost = banquetMenu.BanquetCost,
+                BanquetAvailability = banquetMenu.BanquetAvailability,
+                RestaurantName = banquetMenu.Restaurant.RestaurantName,
+                MenuItems = banquetMenu.BanquetAndMenuItems
+               .Select(bam => bam.Item)
+               .ToList()
+            };
+
+            // Return BanquetMenuViewModel that provides information on what menu items are in a banquet.
+            return View(viewModel);
+        }
+
+        // GET: BanquetMenus/DeleteBanquetMenuItem/
+        public async Task<IActionResult> DeleteBanquetMenuItem(int? banquetId, int? itemId)
+        {
+            var banquetMenu = _context.BanquetMenus
+                .Include(b => b.BanquetAndMenuItems)
+                .FirstOrDefault(b => b.BanquetId == banquetId);
+
+            var banquetAndMenuItem = banquetMenu.BanquetAndMenuItems
+                .FirstOrDefault(bam => bam.ItemId == itemId);
+
+            banquetMenu.BanquetAndMenuItems.Remove(banquetAndMenuItem);
+
+            _context.SaveChanges();
+
+            return RedirectToAction("EditBanquetMenuItems", new { banquetId });
         }
 
         // GET: BanquetMenus/Details/5
