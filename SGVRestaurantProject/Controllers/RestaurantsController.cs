@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+//using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+//using AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -34,19 +36,32 @@ namespace SGVRestaurantProject.Controllers
         // GET: Restaurants/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Restaurants == null)
-            {
-                return NotFound();
-            }
+            var query = _context.Restaurants
+                .Include(p => p.RestaurantBanquetMenus)
+                .Where(p => p.RestaurantId == id)
+                .Select(p => new CompleteRestaurantDetails
+                {
+                    theRestaurant = p,
+                    banquets = p.RestaurantBanquetMenus.ToList()
+                }).FirstOrDefaultAsync();
 
-            var restaurant = await _context.Restaurants
-                .FirstOrDefaultAsync(m => m.RestaurantId == id);
-            if (restaurant == null)
-            {
-                return NotFound();
-            }
 
-            return View(restaurant);
+            return View(await query);
+
+            //if (id == null || _context.Restaurants == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //var restaurant = await _context.Restaurants
+            //    .FirstOrDefaultAsync(m => m.RestaurantId == id);
+
+            //if (restaurant == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //return View(restaurant);
         }
 
         // GET: Restaurants/Create

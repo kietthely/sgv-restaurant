@@ -1,4 +1,4 @@
-﻿@model SGVRestaurantProject.Models.Restaurant
+﻿@model SGVRestaurantProject.Models.CompleteRestaurantDetails
 
 @{
     ViewData["Title"] = "Details";
@@ -11,20 +11,31 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RestaurantAddress)
+            @Html.DisplayNameFor(model => model.theRestaurant.RestaurantName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RestaurantAddress)
+            @Html.DisplayFor(model => model.theRestaurant.RestaurantAddress)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RestaurantName)
+            @Html.DisplayNameFor(model => model.theRestaurant.RestaurantName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RestaurantName)
+            @Html.DisplayFor(model => model.theRestaurant.RestaurantName)
         </dd>
     </dl>
 </div>
+
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.RestaurantId">Edit</a> |
+<ul>
+    
+    @foreach (var restaurantBanquetMenu in Model.banquets)
+        {
+            <li>@restaurantBanquetMenu.Banquet.BanquetName</li>
+        }
+    </ul>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.theRestaurant.RestaurantId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
