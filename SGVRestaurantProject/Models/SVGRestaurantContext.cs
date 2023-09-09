@@ -80,6 +80,14 @@ namespace SGVRestaurantProject.Models
                     .HasColumnName("banquetName");
 
                 entity.Property(e => e.RestaurantId).HasColumnName("restaurantID");
+
+                // Added this to aid with deletion of banquet and item.
+                // Making the relationship between BanquetMenu and BanquetAndMenuItem as optional.
+                entity
+                .HasMany(b => b.BanquetAndMenuItems)
+                .WithOne(bam => bam.Banquet)
+                .HasForeignKey(bam => bam.BanquetId)
+                .IsRequired(false);
             });
 
             modelBuilder.Entity<Booking>(entity =>
