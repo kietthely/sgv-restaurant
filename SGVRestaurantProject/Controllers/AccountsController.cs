@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SGVRestaurantProject.Models;
 using SGVRestaurantProject.ViewModels;
 
@@ -35,6 +36,27 @@ namespace SGVRestaurantProject.Controllers
         }
         public IActionResult Logedin(UserAccount userAccount)
         {
+            return View(userAccount);
+        }
+
+        public IActionResult Register()
+        {
+            ViewData["UserId"] = new SelectList(_context.UserAccounts, "UserId", "UserId");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register([Bind("UserId,UserType,EmailAddress,PhoneNumber")] UserAccount userAccount)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(userAccount);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Login));
+            }
+
+            ViewData["UserId"] = new SelectList(_context.UserAccounts, "UserId", "UserId", userAccount.UserId);
             return View(userAccount);
         }
     }
