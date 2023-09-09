@@ -21,7 +21,10 @@ namespace SGVRestaurantProject.Controllers
         // GET: BanquetAndMenuItems
         public async Task<IActionResult> Index()
         {
-            var sVGRestaurantContext = _context.BanquetAndMenuItems.Include(b => b.Banquet).Include(b => b.Item);
+
+            var sVGRestaurantContext = _context.BanquetAndMenuItems.Include(b => b.Item).Include(b => b.Banquet).ThenInclude(r=>r.Restaurant);
+            
+            
             return View(await sVGRestaurantContext.ToListAsync());
         }
 
@@ -52,11 +55,14 @@ namespace SGVRestaurantProject.Controllers
         .Where(m => m.ItemId == menuItemId)
         .Select(i => i.ItemName)
         .FirstOrDefault();
-            ViewData["ItemId"] = new SelectList(_context.MenuItems, "ItemId", "ItemId");
+
+            // Create a SelectList with the selected item
+
             ViewData["menuItemId"]= menuItemId;
             ViewData["menuItemName"] = itemName;
             ViewData["BanquetId"] = new SelectList(_context.BanquetMenus, "BanquetId", "BanquetId");
-            //ViewData["ItemId"] = new SelectList(_context.MenuItems, "ItemId", "ItemId");
+         
+            ViewData["ItemId"] = new SelectList(_context.MenuItems, "ItemId", "ItemId");
             return View();
         }
 

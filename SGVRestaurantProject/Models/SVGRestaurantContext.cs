@@ -80,6 +80,12 @@ namespace SGVRestaurantProject.Models
                     .HasColumnName("banquetName");
 
                 entity.Property(e => e.RestaurantId).HasColumnName("restaurantID");
+
+                entity.HasOne(d => d.Restaurant)
+                    .WithMany(p => p.BanquetMenus)
+                    .HasForeignKey(d => d.RestaurantId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_BanquetMenu_restaurantID");
             });
 
             modelBuilder.Entity<Booking>(entity =>
