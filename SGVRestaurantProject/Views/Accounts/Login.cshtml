@@ -5,7 +5,7 @@
     <h2>Log In</h2>
 </div>
 <form method="post">
-    <div class="form-group">
+    <div class="form-group">    
         <label asp-for="UserId">UserID:</label>
         <input asp-for="UserId" required>
         <span asp-validation-for="UserId" class="text-danger"></span>
@@ -20,3 +20,5 @@
     </div>
     <div asp-validation-summary="All" class="text-danger"></div>
 </form>
+
+<a asp-controller="Accounts" asp-action="Register" class="btn btn-primary">Sign Up</a>
