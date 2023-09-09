@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace SGVRestaurantProject.Models
 {
-    public partial class SVGRestaurantContext : DbContext
+    public partial class sgvRestaurantContext : DbContext
     {
-        public SVGRestaurantContext()
+        public sgvRestaurantContext()
         {
         }
 
-        public SVGRestaurantContext(DbContextOptions<SVGRestaurantContext> options)
+        public sgvRestaurantContext(DbContextOptions<sgvRestaurantContext> options)
             : base(options)
         {
         }
@@ -31,7 +31,7 @@ namespace SGVRestaurantProject.Models
 //            if (!optionsBuilder.IsConfigured)
 //            {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Data Source=MASTER\\SQLEXPRESS;Initial Catalog=SVGRestaurant;Integrated Security=True;");
+//                optionsBuilder.UseSqlServer("Data Source=DESKTOP-UVIN9MQ\\SQLEXPRESS;Initial Catalog=sgvRestaurant;Integrated Security=True");
 //            }
 //        }
 
@@ -80,6 +80,12 @@ namespace SGVRestaurantProject.Models
                     .HasColumnName("banquetName");
 
                 entity.Property(e => e.RestaurantId).HasColumnName("restaurantID");
+
+                entity.HasOne(d => d.Restaurant)
+                    .WithMany(p => p.BanquetMenus)
+                    .HasForeignKey(d => d.RestaurantId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_BanquetMenu_restaurantID");
             });
 
             modelBuilder.Entity<Booking>(entity =>
