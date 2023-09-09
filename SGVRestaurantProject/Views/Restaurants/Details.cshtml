@@ -4,37 +4,53 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>@Model.theRestaurant.RestaurantName</h1>
 
 <div>
-    <h4>Restaurant</h4>
+    <h5>Restaurant details</h5>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.theRestaurant.RestaurantName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.theRestaurant.RestaurantAddress)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.theRestaurant.RestaurantName)
+            Name
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.theRestaurant.RestaurantName)
         </dd>
+        <dt class = "col-sm-2">
+            Address
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.theRestaurant.RestaurantAddress)
+        </dd>
+        <dt class=" = col-sm-2">
+            Offered Banquets
+        </dt>
+        <dd class = "col-sm-10">
+            @if (@Model.banquetMenus != null && Model.banquetMenus.Any())
+            {
+                <div>
+                    <ul>
+
+                        @foreach (var rbm in Model.banquetMenus)
+                        {
+                            <li>@rbm.BanquetName $@rbm.BanquetCost</li>
+                        }
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div>
+                    <p>This restaurant does not offer banquets :(</p>
+                </div>
+            }
+        </dd>
+
     </dl>
 </div>
 
 
-<div>
-<ul>
-    
-    @foreach (var rbm in Model.banquetMenus)
-        {
-             <li>@rbm.BanquetName</li> 
-        }
-    </ul>
-</div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.theRestaurant.RestaurantId">Edit</a> |
     <a asp-action="Index">Back to List</a>

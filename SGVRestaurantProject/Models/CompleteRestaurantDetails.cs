@@ -6,5 +6,6 @@
         public List<RestaurantBanquetMenu> banquets { get; set; }
         public List<BanquetMenu> banquetMenus { get; set; }
         public List<BanquetAndMenuItem> bami { get; set; }
+        public List<MenuItem> menuItems { get; set; }
     }
 }
