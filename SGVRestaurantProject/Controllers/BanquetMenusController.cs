@@ -65,12 +65,24 @@ namespace SGVRestaurantProject.Controllers
         // GET: BanquetMenus/DeleteBanquetMenuItem/
         public async Task<IActionResult> DeleteBanquetMenuItem(int? banquetId, int? itemId)
         {
+            // query to include the banquet with matching banquetId.
             var banquetMenu = _context.BanquetMenus
                 .Include(b => b.BanquetAndMenuItems)
                 .FirstOrDefault(b => b.BanquetId == banquetId);
 
+            if (banquetMenu == null)
+            { 
+                return NotFound(); 
+            }
+
+            // query to include the menu items that match itemId
             var banquetAndMenuItem = banquetMenu.BanquetAndMenuItems
                 .FirstOrDefault(bam => bam.ItemId == itemId);
+
+            if (banquetAndMenuItem == null)
+            {
+                return NotFound();
+            }
 
             banquetMenu.BanquetAndMenuItems.Remove(banquetAndMenuItem);
 
