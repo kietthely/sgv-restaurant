@@ -1,36 +1,24 @@
 ﻿@model SGVRestaurantProject.Models.BanquetAndMenuItem
 
 @{
-    ViewData["Title"] = "Adding to banquet";
-}
-@functions {
-    public string GetRestaurantNameForBanquet(string banquetId)
-    {
-        return "";
-    }
+    ViewData["Title"] = "Create";
 }
 
+<h1>Create</h1>
 
-<h2>Banquet and Menu Items Management</h2>
+<h4>BanquetAndMenuItem</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" method="post">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
             <div class="form-group">
-                <h3>Item Name: @ViewBag.ItemName</h3>
+                <label asp-for="ItemId" class="control-label"></label>
+                <select asp-for="ItemId" class="form-control" asp-items="ViewBag.ItemId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="BanquetId" class="control-label">Banquet List</label>
-                <select asp-for="BanquetId" class="form-control">
-                    <option value="" hidden>Select a Banquet</option>
-                    @foreach (var item in ViewBag.BanquetId)
-                    {
-                        <option value="@item.Value"> @item.Text</option>
-                    }
-                </select>
-
+                <label asp-for="BanquetId" class="control-label"></label>
+                <select asp-for="BanquetId" class ="form-control" asp-items="ViewBag.BanquetId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -44,8 +32,5 @@
 </div>
 
 @section Scripts {
-
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

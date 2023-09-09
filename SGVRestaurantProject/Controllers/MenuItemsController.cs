@@ -58,6 +58,9 @@ namespace SGVRestaurantProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ItemId,ItemName")] MenuItem menuItem)
         {
+
+            var menuID = menuItem.ItemId;
+            var itemName = menuItem.ItemName;
             if (ModelState.IsValid)
             {
                 _context.Add(menuItem);

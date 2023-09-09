@@ -46,24 +46,17 @@ namespace SGVRestaurantProject.Controllers
         }
 
         // GET: BanquetAndMenuItems/Create
-        public IActionResult Create(int? id)
+        public IActionResult Create(int? menuItemId)
         {
-
             var itemName = _context.MenuItems
-        .Where(m => m.ItemId == id)
+        .Where(m => m.ItemId == menuItemId)
         .Select(i => i.ItemName)
         .FirstOrDefault();
-            ViewData["BanquetId"] = new SelectList(_context.BanquetMenus, "BanquetId", "BanquetName");
-            ViewData["ItemName"] = itemName;
-
-            var query = _context.RestaurantBanquetMenus
-                .Where(rb => rb.BanquetId == id)
-                .Select(rb => new
-                {
-                    BanquetId = rb.BanquetId,
-                    RestaurantId = rb.RestaurantId
-                })
-                .FirstOrDefault();
+            ViewData["ItemId"] = new SelectList(_context.MenuItems, "ItemId", "ItemId");
+            ViewData["menuItemId"]= menuItemId;
+            ViewData["menuItemName"] = itemName;
+            ViewData["BanquetId"] = new SelectList(_context.BanquetMenus, "BanquetId", "BanquetId");
+            //ViewData["ItemId"] = new SelectList(_context.MenuItems, "ItemId", "ItemId");
             return View();
         }
 
@@ -73,16 +66,10 @@ namespace SGVRestaurantProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BanquetAndMenuItemsId,ItemId,BanquetId")] BanquetAndMenuItem banquetAndMenuItem)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(banquetAndMenuItem);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["BanquetId"] = new SelectList(_context.BanquetMenus, "BanquetId", "BanquetId", banquetAndMenuItem.BanquetId);
-            ViewData["ItemId"] = new SelectList(_context.MenuItems, "ItemId", "ItemId", banquetAndMenuItem.ItemId);
-            return View(banquetAndMenuItem);
+    {
+            _context.Add(banquetAndMenuItem);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: BanquetAndMenuItems/Edit/5
