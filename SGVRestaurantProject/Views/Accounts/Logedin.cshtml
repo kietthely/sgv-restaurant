@@ -1,0 +1,6 @@
+﻿@model UserAccount
+
+<h1>Loged In</h1>
+<p>Userid: @Model.UserId</p>
+<p>Email: @Model.EmailAddress</p>
+<p>@ViewContext.HttpContext.Session.GetString("UserType")</p>

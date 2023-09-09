@@ -1,0 +1,22 @@
+﻿@model SGVRestaurantProject.ViewModels.LoginDetailsViewModel
+
+
+<div class="bg-light py-2 mb-2">
+    <h2>Log In</h2>
+</div>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="UserId">UserID:</label>
+        <input asp-for="UserId" required>
+        <span asp-validation-for="UserId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EmailAddress">Email:</label>
+        <input asp-for="EmailAddress" required>
+        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+</form>

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SGVRestaurantProject.Models
+﻿namespace SGVRestaurantProject.Models
 {
     public partial class UserAccount
     {
