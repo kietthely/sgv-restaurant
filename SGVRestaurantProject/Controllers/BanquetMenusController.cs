@@ -66,7 +66,7 @@ namespace SGVRestaurantProject.Controllers
         public async Task<IActionResult> DeleteBanquetMenuItem(int? banquetId, int? itemId)
         {
             // query to include the banquet with matching banquetId.
-            var banquetMenu = _context.BanquetMenus
+            var banquetMenu =  _context.BanquetMenus
                 .Include(b => b.BanquetAndMenuItems)
                 .FirstOrDefault(b => b.BanquetId == banquetId);
 

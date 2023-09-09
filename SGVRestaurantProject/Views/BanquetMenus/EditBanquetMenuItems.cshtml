@@ -21,7 +21,7 @@
             <tr>
                 <td>@menuItem.ItemName</td>
                 <td>
-                    <a class="btn btn-outline-danger" asp-action="" asp-route-id="">Delete</a> 
+                    <a class="btn btn-outline-danger" asp-action="DeleteBanquetMenuItem" asp-route-banquetId="@Model.BanquetId" asp-route-itemId="@menuItem.ItemId">Delete</a>
                 </td>
             </tr>
         }
