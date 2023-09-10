@@ -18,11 +18,29 @@ namespace SGVRestaurantProject.Controllers
             _context = context;
         }
 
+
         // GET: BanquetAndMenuItems
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? banquetId)
         {
-            var sVGRestaurantContext = _context.BanquetAndMenuItems.Include(b => b.Item).Include(b => b.Banquet).ThenInclude(r=>r.Restaurant);
-            return View(await sVGRestaurantContext.ToListAsync());
+            if (banquetId == null)
+            {
+                return NotFound();
+            }
+
+            var SVGRestaurantContext = _context.BanquetAndMenuItems
+                .Include(b => b.Item)
+                .Include(b => b.Banquet)
+                .ThenInclude(r => r.Restaurant)
+                .Where(b => b.BanquetId == banquetId);
+
+            //string restaurantName = SVGRestaurantContext.FirstOrDefault().Banquet.Restaurant.RestaurantName;
+            string restaurantName = _context.BanquetMenus
+                .Where(b => b.BanquetId == banquetId)
+                .Select(r => r.Restaurant.RestaurantName).FirstOrDefault();
+
+            ViewBag.RestaurantName = restaurantName;
+
+            return View(await SVGRestaurantContext.ToListAsync());
         }
 
         // GET: BanquetAndMenuItems/Details/5
@@ -72,7 +90,7 @@ namespace SGVRestaurantProject.Controllers
     {
             _context.Add(banquetAndMenuItem);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "MenuItems");
         }
 
         // GET: BanquetAndMenuItems/Edit/5
@@ -166,7 +184,7 @@ namespace SGVRestaurantProject.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "BanquetAndMenuItems", new {banquetId = banquetAndMenuItem.BanquetId});
         }
 
         private bool BanquetAndMenuItemExists(int id)

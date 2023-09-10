@@ -1,10 +1,13 @@
 ﻿@model IEnumerable<SGVRestaurantProject.Models.MenuItem>
 
 @{
-    ViewData["Title"] = "Add menu item to a banquet";
+    ViewData["Title"] = "Menu items";
 }
 
 <h1>Menu Item List</h1>
+<div>
+    <a class="btn btn-outline-primary mb-4" asp-controller="MenuItems" asp-action="Create">New Menu Item</a>
+</div>
 <div class="row row-cols-3 row-cols-md-3 g-4">
     @foreach (var item in Model)
     {

@@ -24,12 +24,13 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.RestaurantId)
         </dd>
+        
         <dt class="col-sm-2">
             @*@Html.DisplayNameFor(model => model.BanquetCost)*@
             Cost
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BanquetCost)
+            $@Html.DisplayFor(model => model.BanquetCost)
         </dd>
         <dt class="col-sm-2">
             @*@Html.DisplayNameFor(model => model.BanquetAvailability)*@
@@ -43,8 +44,8 @@
 
 
 <div>
-    <a asp-controller="MenuItems" asp-controller="MenuItemsController" asp-action="ViewMenuItems" asp-route-id="@Model?.BanquetId">View banquet menu items</a> |
-    <a asp-controller="MenuItems" asp-action="Create" asp-route-id="@Model?.BanquetId">Add menu items</a> |
-    <a asp-action="Edit" asp-route-id="@Model?.BanquetId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    @* <a class="btn btn-outline-primary" asp-controller="MenuItems" asp-action="Create">Add menu items</a>  *@
+    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model?.BanquetId">Edit details</a> 
+    <a class="btn btn-outline-primary" asp-controller="BanquetAndMenuItems" asp-action="Index" asp-route-banquetId="@Model?.BanquetId">Edit Items</a> 
+    <a class="btn btn-outline-primary" asp-action="Index">Back to List</a>
 </div>

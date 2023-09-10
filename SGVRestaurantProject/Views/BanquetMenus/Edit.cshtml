@@ -4,9 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>EDIT BANQUET DETAILS</h1>
 
-<h4>BanquetMenu</h4>
+@* <h4>BanquetMenu</h4> *@
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,17 +14,17 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BanquetId" />
             <div class="form-group">
-                <label asp-for="BanquetName" class="control-label"></label>
+                <label asp-for="BanquetName" class="control-label">Banquet name</label>
                 <input asp-for="BanquetName" class="form-control" />
                 <span asp-validation-for="BanquetName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RestaurantId" class="control-label"></label>
+                <label asp-for="RestaurantId" class="control-label">Restaurant</label>
                 <input asp-for="RestaurantId" class="form-control" />
                 <span asp-validation-for="RestaurantId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BanquetCost" class="control-label"></label>
+                <label asp-for="BanquetCost" class="control-label">Cost</label>
                 <input asp-for="BanquetCost" class="form-control" />
                 <span asp-validation-for="BanquetCost" class="text-danger"></span>
             </div>
@@ -41,7 +41,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-primary mt-2" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Banquets";
 }
 
-<h1>Available banquets</h1>
+<h1>BANQUETS</h1>
 
 <p>
     <a class="btn btn-outline-primary" asp-action="Create">Add new banquet</a>
@@ -13,10 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BanquetName)
+                Banquet
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RestaurantId)
+                Available at
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.BanquetCost)*@
@@ -37,10 +37,10 @@
                     @Html.DisplayFor(modelItem => item.BanquetName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.RestaurantId)
+                    @Html.DisplayFor(modelItem => item.Restaurant.RestaurantName)
                 </td>
                 <td>
-                    &#36 @{
+                    &#36@{
                         var cost = item.BanquetCost > 0 ? item.BanquetCost : 0;
 
 
@@ -61,9 +61,10 @@
                     }
                 </td>
                 <td>
-                    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.BanquetId">Edit</a>
+                    @* <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.BanquetId">Edit</a> *@
+                    @* <a class="btn btn-outline-primary" asp-controller="BanquetAndMenuItems" asp-action="Index" asp-route-banquetId="@item.BanquetId">Edit Items</a> *@
                     <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.BanquetId">Details</a>
-                    <a class="btn btn-outline-primary" asp-action="Delete" asp-route-id="@item.BanquetId">Delete</a>
+                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.BanquetId">Delete</a>
                 </td>
             </tr>
         }
