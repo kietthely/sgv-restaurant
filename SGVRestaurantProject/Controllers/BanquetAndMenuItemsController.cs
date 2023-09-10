@@ -90,7 +90,7 @@ namespace SGVRestaurantProject.Controllers
     {
             _context.Add(banquetAndMenuItem);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "MenuItems");
         }
 
         // GET: BanquetAndMenuItems/Edit/5
@@ -184,7 +184,7 @@ namespace SGVRestaurantProject.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "BanquetMenusController");
+            return RedirectToAction("Index", "BanquetAndMenuItems", new {banquetId = banquetAndMenuItem.BanquetId});
         }
 
         private bool BanquetAndMenuItemExists(int id)
