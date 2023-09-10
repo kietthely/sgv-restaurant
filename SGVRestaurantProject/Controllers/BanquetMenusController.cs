@@ -28,68 +28,68 @@ namespace SGVRestaurantProject.Controllers
                           Problem("Entity set 'SVGRestaurantContext.BanquetMenus'  is null.");
         }
 
-        // GET: BanquetMenus/EditBanquetMenuItems/1
-        // This directs to a page where menu items are listed available to be deleted via a button.
-        public async Task<IActionResult> EditBanquetMenuItems(int? id)
-        {
+        //// GET: BanquetMenus/EditBanquetMenuItems/1
+        //// This directs to a page where menu items are listed available to be deleted via a button.
+        //public async Task<IActionResult> EditBanquetMenuItems(int? id)
+        //{
 
-            var banquetMenu = _context.BanquetMenus
-            .Include(b => b.Restaurant)
-            .Include(b => b.BanquetAndMenuItems)
-            .ThenInclude(bam => bam.Item)
-            .FirstOrDefault(b => b.BanquetId == id);
+        //    var banquetMenu = _context.BanquetMenus
+        //    .Include(b => b.Restaurant)
+        //    .Include(b => b.BanquetAndMenuItems)
+        //    .ThenInclude(bam => bam.Item)
+        //    .FirstOrDefault(b => b.BanquetId == id);
 
 
-            if (banquetMenu == null)
-            {
-                return NotFound();
-            }
+        //    if (banquetMenu == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var viewModel = new BanquetMenuViewModel
-            {
-                BanquetId = banquetMenu.BanquetId,
-                BanquetName = banquetMenu.BanquetName,
-                RestaurantId = banquetMenu.RestaurantId,
-                BanquetCost = banquetMenu.BanquetCost,
-                BanquetAvailability = banquetMenu.BanquetAvailability,
-                RestaurantName = banquetMenu.Restaurant.RestaurantName,
-                MenuItems = banquetMenu.BanquetAndMenuItems
-               .Select(bam => bam.Item)
-               .ToList()
-            };
+        //    var viewModel = new BanquetMenuViewModel
+        //    {
+        //        BanquetId = banquetMenu.BanquetId,
+        //        BanquetName = banquetMenu.BanquetName,
+        //        RestaurantId = banquetMenu.RestaurantId,
+        //        BanquetCost = banquetMenu.BanquetCost,
+        //        BanquetAvailability = banquetMenu.BanquetAvailability,
+        //        RestaurantName = banquetMenu.Restaurant.RestaurantName,
+        //        MenuItems = banquetMenu.BanquetAndMenuItems
+        //       .Select(bam => bam.Item)
+        //       .ToList()
+        //    };
 
-            // Return BanquetMenuViewModel that provides information on what menu items are in a banquet.
-            return View(viewModel);
-        }
+        //    // Return BanquetMenuViewModel that provides information on what menu items are in a banquet.
+        //    return View(viewModel);
+        //}
 
         // GET: BanquetMenus/DeleteBanquetMenuItem/
-        public async Task<IActionResult> DeleteBanquetMenuItem(int? banquetId, int? itemId)
-        {
-            // query to include the banquet with matching banquetId.
-            var banquetMenu =  _context.BanquetMenus
-                .Include(b => b.BanquetAndMenuItems)
-                .FirstOrDefault(b => b.BanquetId == banquetId);
+        //public async Task<IActionResult> DeleteBanquetMenuItem(int? banquetId, int? itemId)
+        //{
+        //    // query to include the banquet with matching banquetId.
+        //    var banquetMenu =  _context.BanquetMenus
+        //        .Include(b => b.BanquetAndMenuItems)
+        //        .FirstOrDefault(b => b.BanquetId == banquetId);
 
-            if (banquetMenu == null)
-            { 
-                return NotFound(); 
-            }
+        //    if (banquetMenu == null)
+        //    { 
+        //        return NotFound(); 
+        //    }
 
-            // query to include the menu items that match itemId
-            var banquetAndMenuItem = banquetMenu.BanquetAndMenuItems
-                .FirstOrDefault(bam => bam.ItemId == itemId);
+        //    // query to include the menu items that match itemId
+        //    var banquetAndMenuItem = banquetMenu.BanquetAndMenuItems
+        //        .FirstOrDefault(bam => bam.ItemId == itemId);
 
-            if (banquetAndMenuItem == null)
-            {
-                return NotFound();
-            }
+        //    if (banquetAndMenuItem == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            banquetMenu.BanquetAndMenuItems.Remove(banquetAndMenuItem);
+        //    banquetMenu.BanquetAndMenuItems.Remove(banquetAndMenuItem);
 
-            _context.SaveChanges();
+        //    _context.SaveChanges();
 
-            return RedirectToAction("EditBanquetMenuItems", new { banquetId });
-        }
+        //    return RedirectToAction("EditBanquetMenuItems", new { banquetId });
+        //}
 
         // GET: BanquetMenus/Details/5
         public async Task<IActionResult> Details(int? id)
