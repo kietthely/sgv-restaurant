@@ -1,4 +1,4 @@
-﻿@model SelectList
+﻿@model SGVRestaurantProject.ViewModels.BookingDetailViewModel
 
 
 <div class="bg-light py-2 mb-2">
@@ -7,8 +7,13 @@
 <form method="post" asp-controller="BookingTimes" asp-action="Index">
     <div class="row mb-3">
         <div class="col-4">
-            <select name="timeslot" asp-items="@Model" class="form-select">
+            <select name="sittingTimes" asp-items="@Model.SittingTimes" class="form-select">
                 <option value="">Select a time slot...</option>
+            </select>
+        </div>
+        <div class="col-4">
+            <select name="banquets" asp-items="@Model.Banquets" class="form-select">
+                <option value="">Select a banquet...</option>
             </select>
         </div>
         <div class="col-2">
@@ -16,3 +21,6 @@
         </div>
     </div>
 </form>
+
+
+
