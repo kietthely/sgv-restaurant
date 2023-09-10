@@ -90,13 +90,10 @@ namespace SGVRestaurantProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BanquetId,BanquetName,RestaurantId,BanquetCost,BanquetAvailability")] BanquetMenu banquetMenu)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(banquetMenu);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(banquetMenu);
+            _context.Add(banquetMenu);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            
         }
 
         // GET: BanquetMenus/Edit/5
