@@ -19,18 +19,18 @@ namespace SGVRestaurantProject.Controllers
         }
 
         // GET: BanquetAndMenuItems
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? banquetId)
         {
-            //if (banquetId == null)
-            //{
-            //    return NotFound();
-            //}
+            if (banquetId == null)
+            {
+                return NotFound();
+            }
 
             var SVGRestaurantContext = _context.BanquetAndMenuItems
                 .Include(b => b.Item)
                 .Include(b => b.Banquet)
-                .ThenInclude(r => r.Restaurant);
-                //.Where(b => b.BanquetId == banquetId);
+                .ThenInclude(r => r.Restaurant)
+                .Where(b => b.BanquetId == banquetId);
             return View(await SVGRestaurantContext.ToListAsync());
         }
 
