@@ -28,6 +28,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="BanquetAndMenuItemsId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-controller="BanquetAndMenuItems" asp-action="Index" asp-route-banquetId="@Model.Banquet.BanquetId">Back to List</a>
     </form>
 </div>

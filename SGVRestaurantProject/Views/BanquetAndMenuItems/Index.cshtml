@@ -4,12 +4,15 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Available Banquets</h1>
+
+<h1>@ViewBag.RestaurantName</h1>
+
+
 
 <table class="table">
     <thead>
         <tr>
-            <th>Restaurant Name</th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Banquet)
             </th>
@@ -21,8 +24,19 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>@item.Banquet.Restaurant.RestaurantName</td>
+            @if (item.Item == null)
+            {
+                <tr>
+                    <td>
+                        No menu items
+                    </td>
+                    
+                </tr>
+            }
+            else
+            {
+            <tr>
+            
             <td>
                 @Html.DisplayFor(modelItem =>item.Banquet.BanquetName)
             </td>
@@ -35,34 +49,9 @@
                 <a asp-action="Details" asp-route-id="@item.BanquetAndMenuItemsId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.BanquetAndMenuItemsId">Delete</a>
             </td>
-        </tr>
+        </tr>  
+            }
+            
 }
     </tbody>
 </table>
-
-@* <h2>Restaurant Name HERE</h2>
-
-@foreach (var  banquet in Model)
-{
-    <p>@banquet.Banquet.BanquetName</p>
-}
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Menu item
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var banquet in Model)
-        {
-            <tr>
-                <td>@banquet.Item.ItemName</td>
-                <td>
-                    <a class="btn btn-outline-danger" asp-action="DeleteBanquetMenuItem" asp-route-banquetId="" asp-route-itemId="">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table> *@
