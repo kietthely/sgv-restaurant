@@ -13,11 +13,12 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BanquetName)
+                Restaurant
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RestaurantId)
+                Banquet
             </th>
+            
             <th>
                 @*@Html.DisplayNameFor(model => model.BanquetCost)*@
                 Cost
@@ -34,11 +35,12 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BanquetName)
+                    @Html.DisplayFor(modelItem => item.Restaurant.RestaurantName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.RestaurantId)
+                    @Html.DisplayFor(modelItem => item.BanquetName)
                 </td>
+                
                 <td>
                     &#36 @{
                         var cost = item.BanquetCost > 0 ? item.BanquetCost : 0;
@@ -62,8 +64,7 @@
                 </td>
                 <td>
                     <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.BanquetId">Edit</a>
-                    
-                    <a class="btn btn-outline-primary" asp-action="EditBanquetMenuItems" asp-route-id="@item.BanquetId">Edit Items</a>
+                    <a class="btn btn-outline-primary" asp-controller="BanquetAndMenuItems" asp-action="Index" asp-route-id="@item.BanquetId">Edit Items</a>
                     <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.BanquetId">Details</a>
                     <a class="btn btn-outline-primary" asp-action="Delete" asp-route-id="@item.BanquetId">Delete</a>
                 </td>

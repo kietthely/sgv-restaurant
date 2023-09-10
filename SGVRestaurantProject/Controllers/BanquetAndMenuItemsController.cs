@@ -21,8 +21,17 @@ namespace SGVRestaurantProject.Controllers
         // GET: BanquetAndMenuItems
         public async Task<IActionResult> Index()
         {
-            var sVGRestaurantContext = _context.BanquetAndMenuItems.Include(b => b.Item).Include(b => b.Banquet).ThenInclude(r=>r.Restaurant);
-            return View(await sVGRestaurantContext.ToListAsync());
+            //if (banquetId == null)
+            //{
+            //    return NotFound();
+            //}
+
+            var SVGRestaurantContext = _context.BanquetAndMenuItems
+                .Include(b => b.Item)
+                .Include(b => b.Banquet)
+                .ThenInclude(r => r.Restaurant);
+                //.Where(b => b.BanquetId == banquetId);
+            return View(await SVGRestaurantContext.ToListAsync());
         }
 
         // GET: BanquetAndMenuItems/Details/5

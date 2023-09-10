@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Available Banquets</h1>
 
 <table class="table">
     <thead>
@@ -28,7 +28,7 @@
             </td>
            
             <td>
-                @Html.DisplayFor(modelItem => item.Item.ItemId)
+                @Html.DisplayFor(modelItem => item.Item.ItemName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.BanquetAndMenuItemsId">Edit</a> |
@@ -39,3 +39,30 @@
 }
     </tbody>
 </table>
+
+@* <h2>Restaurant Name HERE</h2>
+
+@foreach (var  banquet in Model)
+{
+    <p>@banquet.Banquet.BanquetName</p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Menu item
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var banquet in Model)
+        {
+            <tr>
+                <td>@banquet.Item.ItemName</td>
+                <td>
+                    <a class="btn btn-outline-danger" asp-action="DeleteBanquetMenuItem" asp-route-banquetId="" asp-route-itemId="">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table> *@

@@ -23,8 +23,12 @@ namespace SGVRestaurantProject.Controllers
         // GET: BanquetMenus
         public async Task<IActionResult> Index()
         {
+
+            var indexQuery = _context.BanquetMenus
+                .Include(r => r.Restaurant);
+
               return _context.BanquetMenus != null ? 
-                          View(await _context.BanquetMenus.ToListAsync()) :
+                          View(indexQuery) :
                           Problem("Entity set 'SVGRestaurantContext.BanquetMenus'  is null.");
         }
 
