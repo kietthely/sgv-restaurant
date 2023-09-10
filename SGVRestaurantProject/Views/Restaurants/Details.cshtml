@@ -40,11 +40,23 @@
                 </div>
             }
         </dd>
-
     </dl>
 </div>
 
+<div>
 
+    @foreach (var banquetMenu in Model.banquetMenus)
+    {
+        <h2>@banquetMenu.BanquetName $@banquetMenu.BanquetCost</h2>
+
+        <ul>
+            @foreach (var bami in banquetMenu.BanquetAndMenuItems)
+            {
+                <li>@bami.Item.ItemName</li>
+            }
+        </ul>
+    }
+</div>
 
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.theRestaurant.RestaurantId">Edit</a> |

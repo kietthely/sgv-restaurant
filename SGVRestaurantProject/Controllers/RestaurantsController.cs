@@ -43,21 +43,32 @@ namespace SGVRestaurantProject.Controllers
             }
 
             var query = _context.Restaurants
-                .Include(r => r.RestaurantBanquetMenus)
+                .Include(r => r.BanquetMenus)
+                .ThenInclude(bm => bm.BanquetAndMenuItems)
+                .ThenInclude(bami => bami.Item)
                 .Where(r => r.RestaurantId == id)
                 .Select(r => new CompleteRestaurantDetails
                 {
                     theRestaurant = r,
                     banquets = r.RestaurantBanquetMenus.ToList(),
-                    banquetMenus = r.BanquetMenus.ToList()
-                }).FirstOrDefaultAsync();
+                    banquetMenus = r.BanquetMenus.ToList(),
+                    bami = r.BanquetMenus
+                        .SelectMany(bm => bm.BanquetAndMenuItems)
+                        .ToList(),
+                    menuItems = r.BanquetMenus
+                        .SelectMany(bm => bm.BanquetAndMenuItems)
+                        .Select(bami => bami.Item)
+                        .ToList()
+                })
+                .FirstOrDefault();
+
 
             if (query == null)
             {
                 return NotFound();
             }
 
-            return View(await query);
+            return View(query);
 
         }
 
