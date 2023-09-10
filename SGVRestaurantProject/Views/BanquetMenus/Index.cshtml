@@ -13,12 +13,11 @@
     <thead>
         <tr>
             <th>
-                Restaurant
-            </th>
-            <th>
                 Banquet
             </th>
-            
+            <th>
+                Available at
+            </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.BanquetCost)*@
                 Cost
@@ -35,12 +34,11 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Restaurant.RestaurantName)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.BanquetName)
                 </td>
-                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Restaurant.RestaurantName)
+                </td>
                 <td>
                     &#36@{
                         var cost = item.BanquetCost > 0 ? item.BanquetCost : 0;
