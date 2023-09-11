@@ -18,5 +18,11 @@ namespace SGVRestaurantProject.Controllers
 
             return View(roles);
         }
+
+        [HttpGet]
+        public IActionResult AddRole()
+        {
+            return View();
+        }
     }
 }
