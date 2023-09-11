@@ -9,6 +9,7 @@ builder.Services.AddDbContext<SVGRestaurantContext>(options =>
     throw new InvalidOperationException("Connection string 'SGVRestaurantProject' not found")));
 
 builder.Services.AddDefaultIdentity<DefaultUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<SVGRestaurantContext>();
 
 // Add services to the container.
