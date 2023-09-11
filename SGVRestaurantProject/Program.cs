@@ -1,14 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using SGVRestaurantProject.Models;
+using Microsoft.AspNetCore.Identity;
+using SGVRestaurantProject.Models.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SVGRestaurantContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SGVRestaurantProject") ??
     throw new InvalidOperationException("Connection string 'SGVRestaurantProject' not found")));
 
+builder.Services.AddDefaultIdentity<DefaultUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<SVGRestaurantContext>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddRazorPages();
 
 builder.Services.AddSession(options =>
 {
@@ -32,11 +37,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Restaurants}/{action=RestaurantPage}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();

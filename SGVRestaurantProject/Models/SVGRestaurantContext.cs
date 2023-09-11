@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using SGVRestaurantProject.Models.Users;
 
 namespace SGVRestaurantProject.Models
 {
-    public partial class SVGRestaurantContext : DbContext
+    public partial class SVGRestaurantContext : IdentityDbContext<DefaultUser>
     {
         public SVGRestaurantContext()
         {
@@ -37,6 +39,8 @@ namespace SGVRestaurantProject.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<BanquetAndMenuItem>(entity =>
             {
                 entity.HasKey(e => e.BanquetAndMenuItemsId)
