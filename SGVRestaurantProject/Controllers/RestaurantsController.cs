@@ -43,7 +43,7 @@ namespace SGVRestaurantProject.Controllers
                 return NotFound();
             }
 
-            var query = _context.Restaurants
+            var query = await _context.Restaurants
                 .Include(r => r.BanquetMenus)
                 .ThenInclude(bm => bm.BanquetAndMenuItems)
                 .ThenInclude(bami => bami.Item)
@@ -61,7 +61,7 @@ namespace SGVRestaurantProject.Controllers
                         .Select(bami => bami.Item)
                         .ToList()
                 })
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
 
             if (query == null)
