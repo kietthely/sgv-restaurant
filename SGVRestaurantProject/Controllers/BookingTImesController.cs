@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGVRestaurantProject.Models;
+using SGVRestaurantProject.ViewModels;
 
 namespace SGVRestaurantProject.Controllers
 {
@@ -19,8 +16,9 @@ namespace SGVRestaurantProject.Controllers
         }
 
         // GET: BookingTImes
-        public IActionResult Index(int restaurantID)
+        public IActionResult Index(int restaurantID, BookingDetailViewModel vm)
         {
+            #region sitting times query
             var sittingTimes = _context.RestaurantSittings
                 .Where(rs => rs.RestaurantId.Equals(restaurantID))
                 .Join(_context.Sittings,
@@ -37,9 +35,26 @@ namespace SGVRestaurantProject.Controllers
                 .Select(p => $"{p.SittingStart} - {p.SittingEnd}")
                 .ToList();
 
-            var sittingTimesList = new SelectList(sittingTimes);
+            vm.SittingTimes = new SelectList(sittingTimes);
+            #endregion
 
-            return View(sittingTimesList);
+            #region banquets query
+            var data = from r in _context.Restaurants
+                       join bm in _context.BanquetMenus on r.RestaurantId equals bm.RestaurantId
+                       join bami in _context.BanquetAndMenuItems on bm.BanquetId equals bami.BanquetId
+                       join mi in _context.MenuItems on bami.ItemId equals mi.ItemId
+                       where r.RestaurantId == restaurantID
+                       select new
+                       {
+                           restaurant = r,
+                           banquetMenu = bm,
+                           banquetAndMenuItems = bami,
+                           menuItems = mi
+                       };
+
+            vm.Banquets = new SelectList(data.Select(d => d.banquetMenu.BanquetName).Distinct().ToList());
+            #endregion
+            return View(vm);
         }
 
         // GET: BookingTImes/Details/5
@@ -183,14 +198,14 @@ namespace SGVRestaurantProject.Controllers
             {
                 _context.Bookings.Remove(booking);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool BookingExists(int id)
         {
-          return (_context.Bookings?.Any(e => e.BookingId == id)).GetValueOrDefault();
+            return (_context.Bookings?.Any(e => e.BookingId == id)).GetValueOrDefault();
         }
     }
 }
