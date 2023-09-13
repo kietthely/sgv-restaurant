@@ -47,11 +47,30 @@ namespace SGVRestaurantProject.Controllers
         }
 
         // GET: Bookings/Create
-        public IActionResult Create()
+        public IActionResult Create(int? restaurantId)
         {
-            ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantName");
-            ViewData["SittingId"] = new SelectList(_context.Sittings, "SittingId", "SittingType");
-            ViewData["DefaultUserId"] = new SelectList(_context.Users, "Id", "UserName");
+
+            var filteredSittings = _context.RestaurantSittings
+                .Where(rs => rs.RestaurantId == restaurantId)
+                .Select(rs => new SelectListItem
+                {
+                    Value = rs.SittingId.ToString(),
+                    Text = rs.Sitting.SittingType
+                }).ToList();
+
+            var filteredRestaurant = _context.Restaurants
+                .Where(r => r.RestaurantId == restaurantId)
+                .ToList();
+
+            var currentUser = User.Identity.Name;
+            var filteredUser = _context.Users
+                .Where(u => u.UserName == currentUser)
+                .ToList();
+
+
+            ViewData["RestaurantId"] = new SelectList(filteredRestaurant, "RestaurantId", "RestaurantName");
+            ViewData["SittingId"] = new SelectList(filteredSittings, "Value", "Text");
+            ViewData["DefaultUserId"] = new SelectList(filteredUser, "Id", "UserName");
             return View();
         }
 
