@@ -1,0 +1,10 @@
+﻿@model IEnumerable<SGVRestaurantProject.Models.Booking>
+
+<h1>
+hello
+</h1>
+
+@foreach (var i in Model)
+{
+    <p>DEFAULT USER: @i.User.UserName ANDDDD BOOKING ID: @i.BookingId </p>
+}

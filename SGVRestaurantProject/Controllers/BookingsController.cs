@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGVRestaurantProject.Models;
+using SGVRestaurantProject.Models.Users;
 
 namespace SGVRestaurantProject.Controllers
 {
     public class BookingsController : Controller
     {
         private readonly SVGRestaurantContext _context;
+        private readonly UserManager<DefaultUser> _userManager;
 
-        public BookingsController(SVGRestaurantContext context)
+        public BookingsController(UserManager<DefaultUser> userManager , SVGRestaurantContext context)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Bookings
@@ -23,6 +27,27 @@ namespace SGVRestaurantProject.Controllers
         {
             var sVGRestaurantContext = _context.Bookings.Include(b => b.Restaurant).Include(b => b.Sitting).Include(b => b.User);
             return View(await sVGRestaurantContext.ToListAsync());
+        }
+
+        // GET: Bookings
+        public async Task<IActionResult> UserIndex(string? userName)
+        {
+            var currentUser = await _userManager.FindByNameAsync(userName);
+
+            var userId = currentUser.Id;
+            var bookingDetails = _context.Bookings
+                .Include(r => r.Restaurant)
+                .Include(s => s.Sitting)
+                .Where(u => u.DefaultUserId == userId)
+                .ToList();
+            return View(bookingDetails);
+
+            //var sVGRestaurantContext = _context.Bookings
+            //    .Include(b => b.Restaurant)
+            //    .Include(b => b.Sitting)
+            //    .Include(b => b.User)
+            //    .Where(b => b.User.UserName == userName);
+            //return View(await sVGRestaurantContext.ToListAsync());
         }
 
         // GET: Bookings/Details/5
