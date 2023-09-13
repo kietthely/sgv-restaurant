@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SGVRestaurantProject.Models.Users;
+using System;
 using System.Collections.Generic;
 
 namespace SGVRestaurantProject.Models
@@ -7,11 +8,11 @@ namespace SGVRestaurantProject.Models
     {
         public int BookingId { get; set; }
         public int SittingId { get; set; }
-        public int UserId { get; set; }
+        public string? DefaultUserId { get; set; }
         public int RestaurantId { get; set; }
 
         public virtual Restaurant Restaurant { get; set; } = null!;
         public virtual Sitting Sitting { get; set; } = null!;
-        public virtual UserAccount User { get; set; } = null!;
+        public virtual DefaultUser User { get; set; } = null!;
     }
 }

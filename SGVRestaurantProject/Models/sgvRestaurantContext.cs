@@ -98,7 +98,7 @@ namespace SGVRestaurantProject.Models
 
                 entity.Property(e => e.SittingId).HasColumnName("sittingID");
 
-                entity.Property(e => e.UserId).HasColumnName("userID");
+                entity.Property(e => e.DefaultUserId).HasColumnName("userID");
 
                 entity.HasOne(d => d.Restaurant)
                     .WithMany(p => p.Bookings)
@@ -114,7 +114,7 @@ namespace SGVRestaurantProject.Models
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Bookings)
-                    .HasForeignKey(d => d.UserId)
+                    .HasForeignKey(d => d.DefaultUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_booking_UserAccount");
             });

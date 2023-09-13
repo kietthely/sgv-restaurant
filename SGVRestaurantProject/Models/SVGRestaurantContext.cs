@@ -28,14 +28,14 @@ namespace SGVRestaurantProject.Models
         public virtual DbSet<Sitting> Sittings { get; set; } = null!;
         public virtual DbSet<UserAccount> UserAccounts { get; set; } = null!;
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Data Source=MASTER\\SQLEXPRESS;Initial Catalog=SVGRestaurant;Integrated Security=True;");
-//            }
-//        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Data Source=MN-LAPLENO\\SQLEXPRESS;Initial Catalog=SvgRestaurant;Integrated Security=True");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -100,11 +100,13 @@ namespace SGVRestaurantProject.Models
 
                 entity.Property(e => e.BookingId).HasColumnName("bookingID");
 
-                entity.Property(e => e.RestaurantId).HasColumnName("restaurantID");
+               
 
                 entity.Property(e => e.SittingId).HasColumnName("sittingID");
 
-                entity.Property(e => e.UserId).HasColumnName("userID");
+                entity.Property(e => e.DefaultUserId).HasColumnName("DefaultUserId");
+                entity.Property(e => e.RestaurantId).HasColumnName("restaurantID");
+
 
                 entity.HasOne(d => d.Restaurant)
                     .WithMany(p => p.Bookings)
@@ -120,9 +122,9 @@ namespace SGVRestaurantProject.Models
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Bookings)
-                    .HasForeignKey(d => d.UserId)
+                    .HasForeignKey(d => d.DefaultUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_booking_UserAccount");
+                    .HasConstraintName("fk_booking_DefaultUser");
             });
 
             modelBuilder.Entity<MenuItem>(entity =>

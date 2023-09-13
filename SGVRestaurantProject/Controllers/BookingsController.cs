@@ -1,63 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGVRestaurantProject.Models;
-using SGVRestaurantProject.ViewModels;
 
 namespace SGVRestaurantProject.Controllers
 {
-    public class BookingTImesController : Controller
+    public class BookingsController : Controller
     {
         private readonly SVGRestaurantContext _context;
 
-        public BookingTImesController(SVGRestaurantContext context)
+        public BookingsController(SVGRestaurantContext context)
         {
             _context = context;
         }
 
-        // GET: BookingTImes
-        public IActionResult Index(int restaurantID, BookingDetailViewModel vm)
+        // GET: Bookings
+        public async Task<IActionResult> Index()
         {
-            #region sitting times query
-            var sittingTimes = _context.RestaurantSittings
-                .Where(rs => rs.RestaurantId.Equals(restaurantID))
-                .Join(_context.Sittings,
-                r => r.SittingId,
-                s => s.SittingId,
-                (r, s) => new { restaurantSitting = r, sitting = s })
-                .Select(p => new
-                {
-                    p.restaurantSitting.RestaurantId,
-                    p.sitting.SittingStart,
-                    p.sitting.SittingEnd
-                })
-                .OrderBy(p => p.SittingStart)
-                .Select(p => $"{p.SittingStart} - {p.SittingEnd}")
-                .ToList();
-
-            vm.SittingTimes = new SelectList(sittingTimes);
-            #endregion
-
-            #region banquets query
-            var data = from r in _context.Restaurants
-                       join bm in _context.BanquetMenus on r.RestaurantId equals bm.RestaurantId
-                       join bami in _context.BanquetAndMenuItems on bm.BanquetId equals bami.BanquetId
-                       join mi in _context.MenuItems on bami.ItemId equals mi.ItemId
-                       where r.RestaurantId == restaurantID
-                       select new
-                       {
-                           restaurant = r,
-                           banquetMenu = bm,
-                           banquetAndMenuItems = bami,
-                           menuItems = mi
-                       };
-
-            vm.Banquets = new SelectList(data.Select(d => d.banquetMenu.BanquetName).Distinct().ToList());
-            #endregion
-            return View(vm);
+            var sVGRestaurantContext = _context.Bookings.Include(b => b.Restaurant).Include(b => b.Sitting).Include(b => b.User);
+            return View(await sVGRestaurantContext.ToListAsync());
         }
 
-        // GET: BookingTImes/Details/5
+        // GET: Bookings/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Bookings == null)
@@ -78,35 +46,39 @@ namespace SGVRestaurantProject.Controllers
             return View(booking);
         }
 
-        // GET: BookingTImes/Create
+        // GET: Bookings/Create
         public IActionResult Create()
         {
             ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId");
             ViewData["SittingId"] = new SelectList(_context.Sittings, "SittingId", "SittingId");
-            ViewData["UserId"] = new SelectList(_context.UserAccounts, "UserId", "UserId");
+            ViewData["DefaultUserId"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
-        // POST: BookingTImes/Create
+        // POST: Bookings/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookingId,SittingId,UserId,RestaurantId")] Booking booking)
+        public async Task<IActionResult> Create([Bind("BookingId,SittingId,DefaultUserId,RestaurantId")] Booking booking)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(booking);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId", booking.RestaurantId);
-            ViewData["SittingId"] = new SelectList(_context.Sittings, "SittingId", "SittingId", booking.SittingId);
-            ViewData["UserId"] = new SelectList(_context.UserAccounts, "UserId", "UserId", booking.DefaultUserId);
-            return View(booking);
+            //if (ModelState.IsValid)
+            //{
+            //    _context.Add(booking);
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId", booking.RestaurantId);
+            //ViewData["SittingId"] = new SelectList(_context.Sittings, "SittingId", "SittingId", booking.SittingId);
+            //ViewData["DefaultUserId"] = new SelectList(_context.Users, "Id", "Id", booking.DefaultUserId);
+            //return View(booking);
+
+            _context.Add(booking);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: BookingTImes/Edit/5
+        // GET: Bookings/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Bookings == null)
@@ -121,16 +93,16 @@ namespace SGVRestaurantProject.Controllers
             }
             ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId", booking.RestaurantId);
             ViewData["SittingId"] = new SelectList(_context.Sittings, "SittingId", "SittingId", booking.SittingId);
-            ViewData["UserId"] = new SelectList(_context.UserAccounts, "UserId", "UserId", booking.DefaultUserId);
+            ViewData["DefaultUserId"] = new SelectList(_context.Users, "Id", "Id", booking.DefaultUserId);
             return View(booking);
         }
 
-        // POST: BookingTImes/Edit/5
+        // POST: Bookings/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookingId,SittingId,UserId,RestaurantId")] Booking booking)
+        public async Task<IActionResult> Edit(int id, [Bind("BookingId,SittingId,DefaultUserId,RestaurantId")] Booking booking)
         {
             if (id != booking.BookingId)
             {
@@ -159,11 +131,11 @@ namespace SGVRestaurantProject.Controllers
             }
             ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId", booking.RestaurantId);
             ViewData["SittingId"] = new SelectList(_context.Sittings, "SittingId", "SittingId", booking.SittingId);
-            ViewData["UserId"] = new SelectList(_context.UserAccounts, "UserId", "UserId", booking.DefaultUserId);
+            ViewData["DefaultUserId"] = new SelectList(_context.Users, "Id", "Id", booking.DefaultUserId);
             return View(booking);
         }
 
-        // GET: BookingTImes/Delete/5
+        // GET: Bookings/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Bookings == null)
@@ -184,7 +156,7 @@ namespace SGVRestaurantProject.Controllers
             return View(booking);
         }
 
-        // POST: BookingTImes/Delete/5
+        // POST: Bookings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
