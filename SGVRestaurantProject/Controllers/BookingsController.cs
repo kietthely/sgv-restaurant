@@ -49,8 +49,8 @@ namespace SGVRestaurantProject.Controllers
         // GET: Bookings/Create
         public IActionResult Create()
         {
-            ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId");
-            ViewData["SittingId"] = new SelectList(_context.Sittings, "SittingId", "SittingId");
+            ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantName");
+            ViewData["SittingId"] = new SelectList(_context.Sittings, "SittingId", "SittingType");
             ViewData["DefaultUserId"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
