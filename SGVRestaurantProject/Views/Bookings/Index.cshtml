@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<SGVRestaurantProject.Models.Booking>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Make Bookings";
 }
 
-<h1>Index</h1>
+<h1>Making Reservation</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -16,7 +13,10 @@
                 @Html.DisplayNameFor(model => model.Restaurant)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sitting)
+                @Html.DisplayNameFor(model => model.Sitting.SittingStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sitting.SittingEnd)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.User)
@@ -28,18 +28,21 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Restaurant.RestaurantId)
+                @Html.DisplayFor(modelItem => item.Restaurant.RestaurantName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Sitting.SittingId)
+                @Html.DisplayFor(modelItem => item.Sitting.SittingStart)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @Html.DisplayFor(modelItem => item.Sitting.SittingEnd)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.BookingId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BookingId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BookingId">Delete</a>
+                @Html.DisplayFor(modelItem => item.User.UserName)
+            </td>
+            <td>
+                <a class="btn btn-outline-primary p-1" asp-action="Edit" asp-route-id="@item.BookingId">Edit</a> 
+                    <a class="btn btn-outline-primary p-1" asp-action="Details" asp-route-id="@item.BookingId">Details</a> 
+                    <a class="btn btn-outline-primary p-1" asp-action="Delete" asp-route-id="@item.BookingId">Delete</a>
             </td>
         </tr>
 }
