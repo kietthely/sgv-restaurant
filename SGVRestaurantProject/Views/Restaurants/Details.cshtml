@@ -21,11 +21,12 @@
         {
             <div class="col-md-6 mb-4">
                 <div class="h-100 p-5 bg-light border rounded-3 ">
-                    <h2>@banquetMenu.BanquetName</h2>
+                   
+                    <h2>@banquetMenu.BanquetName ($@banquetMenu.BanquetCost PP)</h2>
                     <ul>
                         @foreach (var bami in banquetMenu.BanquetAndMenuItems)
                         {
-                            <li>@bami.Item.ItemName</li>
+                            <li>@bami.Item.ItemName </li>
                         }
                     </ul>
                 </div>
