@@ -12,20 +12,20 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="SittingId" class="control-label"></label>
+            <div class="form-group p-1">
+                <label asp-for="SittingId" class="control-label">Sitting times</label>
                 <select asp-for="SittingId" class="form-control" asp-items='ViewBag.SittingId'></select>
             </div>
-            <div class="form-group">
-                <label asp-for="DefaultUserId" class="control-label"></label>
+            <div class="form-group p-1">
+                <label asp-for="DefaultUserId" class="control-label">Customer ID</label>
                 <select asp-for="DefaultUserId" class ="form-control" asp-items="ViewBag.DefaultUserId"></select>
             </div>
-            <div class="form-group">
+            <div class="form-group p-1">
                 @*<a href="c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml">c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml</a>*@
-                <label asp-for="RestaurantId" class="control-label"></label>
+                <label asp-for="RestaurantId" class="control-label">Restaurant Name</label>
                 <select asp-for="RestaurantId" class ="form-control" asp-items="ViewBag.RestaurantId"></select>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-2 p-1">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
