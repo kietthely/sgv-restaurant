@@ -20,7 +20,7 @@ namespace SGVRestaurantProject.Models
         {
             get
             {
-                return SittingStart + " - " + SittingEnd;
+                return SittingStart + ":00 - " + SittingEnd + ":00";
             }
         }
         public virtual ICollection<Booking> Bookings { get; set; }

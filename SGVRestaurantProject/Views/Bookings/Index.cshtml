@@ -13,10 +13,7 @@
                 @Html.DisplayNameFor(model => model.Restaurant)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sitting.SittingStart)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sitting.SittingEnd)
+                @Html.DisplayNameFor(model => model.Sitting.SittingDuration)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.User)
@@ -31,10 +28,7 @@
                 @Html.DisplayFor(modelItem => item.Restaurant.RestaurantName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Sitting.SittingStart)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sitting.SittingEnd)
+                @Html.DisplayFor(modelItem => item.Sitting.SittingDuration)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.User.UserName)
