@@ -119,7 +119,7 @@ namespace SGVRestaurantProject.Controllers
 
             _context.Add(booking);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("RestaurantPage", "Restaurants");
         }
 
         // GET: Bookings/Edit/5
@@ -217,7 +217,7 @@ namespace SGVRestaurantProject.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("RestaurantPage", "Restaurants");
         }
 
         private bool BookingExists(int id)
