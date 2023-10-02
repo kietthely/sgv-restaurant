@@ -18,12 +18,12 @@
             </div>
             <div class="form-group p-1">
                 <label asp-for="DefaultUserId" class="control-label">Customer ID</label>
-                <select asp-for="DefaultUserId" class="form-control form-control-plaintext" asp-items="ViewBag.DefaultUserId"></select>
+                <input asp-for="DefaultUserId" class="form-control form-control-plaintext" value="ViewBag.DefaultUserId">
             </div>
             <div class="form-group p-1">
                 @*<a href="c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml">c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml</a>*@
                 <label asp-for="RestaurantId" class="control-label">Restaurant Name</label>
-                <select asp-for="RestaurantId" class="form-control form-control-plaintext" asp-items="ViewBag.RestaurantId"></select>
+                <input asp-for="RestaurantId" class="form-control form-control-plaintext" value="ViewBag.RestaurantId">
             </div>
             <div class="form-group p-1">
                 <label asp-for="NumberOfGuests" class="control-label">Number Of Guests</label>
