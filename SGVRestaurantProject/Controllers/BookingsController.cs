@@ -31,8 +31,12 @@ namespace SGVRestaurantProject.Controllers
 
         // GET: Bookings for restaurant staff view. 
         // Shows the current reservations made for a selected restaurant
-        public async Task<IActionResult> RestaurantBookings()
+        public async Task<IActionResult> RestaurantBookings(int restaurantId)
         {
+            var rBookings = await _context.Bookings
+                .Where(b => b.Restaurant.RestaurantId == restaurantId)
+                .ToListAsync();
+
             return View();
         }
 
