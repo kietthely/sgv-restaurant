@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGVRestaurantProject.Models;
 using SGVRestaurantProject.Models.Users;
+using SGVRestaurantProject.Models.ViewModel;
 
 namespace SGVRestaurantProject.Controllers
 {
@@ -16,7 +17,7 @@ namespace SGVRestaurantProject.Controllers
         private readonly SVGRestaurantContext _context;
         private readonly UserManager<DefaultUser> _userManager;
 
-        public BookingsController(UserManager<DefaultUser> userManager , SVGRestaurantContext context)
+        public BookingsController(UserManager<DefaultUser> userManager, SVGRestaurantContext context)
         {
             _context = context;
             _userManager = userManager;
@@ -31,13 +32,30 @@ namespace SGVRestaurantProject.Controllers
 
         // GET: Bookings for restaurant staff view. 
         // Shows the current reservations made for a selected restaurant
-        public async Task<IActionResult> RestaurantBookings(int restaurantId)
+        public async Task<IActionResult> RestaurantBookings(int? restaurantId, RestaurantBookingsVM RBVM)
         {
+
+            #region populate restaurant property in vm
+            var res = await _context.Restaurants
+                .Where(r => r.RestaurantId == restaurantId)
+                .FirstOrDefaultAsync();
+            if (res != null)
+            {
+                RBVM.theRestaurant = res;
+            }
+            #endregion
+
+            #region Populate bookings property in vm
             var rBookings = await _context.Bookings
-                .Where(b => b.Restaurant.RestaurantId == restaurantId)
+                .Where(b => b.RestaurantId == restaurantId)
+                .Include(b => b.Sitting)
+                .Include(b => b.User)
                 .ToListAsync();
 
-            return View();
+            RBVM.restaurantBookings = rBookings;
+            #endregion
+
+            return View(RBVM);
         }
 
         // GET: Bookings

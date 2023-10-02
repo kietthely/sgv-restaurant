@@ -1,36 +1,55 @@
-﻿@model SGVRestaurantProject.Models.Booking
+﻿@model IEnumerable<SGVRestaurantProject.Models.Booking>
 
 @{
     ViewData["Title"] = "Restaurant Bookings";
+
+    int count = 0;
 }
 
-<h1>RestaurantBookings</h1>
+<h1>Restaurant Bookings</h1>
 
 <div>
-    <h4>Booking</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Restaurant)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Restaurant.RestaurantId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sitting)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sitting.SittingId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.Id)
-        </dd>
-    </dl>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Sitting Id</th>
+                <th scope="col">Sitting</th>
+                <th scope="col">Sitting Times</th>
+                <th scope="col">Booked by</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                @foreach (var booking in Model)
+                {
+                        count++;
+                    
+                    <tr>
+                        <th scope="row">@count</th>
+                        <td>@booking.SittingId</td>
+                        <td>@booking.Sitting.SittingType</td>
+                        <td>@booking.Sitting.SittingDuration</td>
+                        <td>@booking.User.FirstName @booking.User.LastName</td>
+                        <td>@booking.User.Email</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    @{
+                        count++;
+                    }
+                    <th scope="row">@count</th>
+                    <td>No data in model.</td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.BookingId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
