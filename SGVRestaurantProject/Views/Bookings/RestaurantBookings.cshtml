@@ -9,24 +9,25 @@
 <h1>@Model.theRestaurant.RestaurantName Bookings</h1>
 
 <div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Sitting Id</th>
-                <th scope="col">Sitting</th>
-                <th scope="col">Sitting Times</th>
-                <th scope="col">Booked by</th>
-                <th scope="col">Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.restaurantBookings.Any())
-            {
+    @if (Model.restaurantBookings.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Sitting Id</th>
+                    <th scope="col">Sitting</th>
+                    <th scope="col">Sitting Times</th>
+                    <th scope="col">Booked by</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
                 @foreach (var booking in Model.restaurantBookings)
                 {
-                        count++;
-                    
+                    count++;
                     <tr>
                         <th scope="row">@count</th>
                         <td>@booking.SittingId</td>
@@ -36,20 +37,13 @@
                         <td>@booking.User.Email</td>
                     </tr>
                 }
-            }
-            else
-            {
-                <tr>
-                    @{
-                        count++;
-                    }
-                    <th scope="row">@count</th>
-                    <td>No data in model.</td>
-                </tr>
-            }
 
-
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-secondary">No bookings ... </p>
+    }
 </div>
 
