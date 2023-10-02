@@ -31,6 +31,7 @@
                 @Html.DisplayFor(modelItem => item.RestaurantName)
             </td>
             <td>
+                <a asp-controller="Bookings" asp-action="RestaurantBookings" asp-route-restaurantId="@item.RestaurantId">View Bookings</a> |
                 <a asp-action="Edit" asp-route-id="@item.RestaurantId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.RestaurantId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.RestaurantId">Delete</a>
