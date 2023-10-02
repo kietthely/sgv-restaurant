@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SGVRestaurantProject.Models.Booking>
+﻿@model SGVRestaurantProject.Models.ViewModel.RestaurantBookingsVM
 
 @{
     ViewData["Title"] = "Restaurant Bookings";
@@ -6,7 +6,7 @@
     int count = 0;
 }
 
-<h1>Restaurant Bookings</h1>
+<h1>@Model.theRestaurant.RestaurantName Bookings</h1>
 
 <div>
     <table class="table">
@@ -21,9 +21,9 @@
             </tr>
         </thead>
         <tbody>
-            @if (Model.Any())
+            @if (Model.restaurantBookings.Any())
             {
-                @foreach (var booking in Model)
+                @foreach (var booking in Model.restaurantBookings)
                 {
                         count++;
                     
