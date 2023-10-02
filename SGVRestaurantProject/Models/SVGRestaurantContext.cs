@@ -106,6 +106,10 @@ namespace SGVRestaurantProject.Models
 
                 entity.Property(e => e.DefaultUserId).HasColumnName("DefaultUserId");
                 entity.Property(e => e.RestaurantId).HasColumnName("restaurantID");
+                entity.Property(e => e.BanquetMenuID).HasColumnName("banquetID");
+                entity.Property(e => e.NumberOfGuests).HasColumnName("numberOfGuest");
+                entity.Property(e => e.BookingDate).HasColumnName("bookingDate");
+                entity.Property(e => e.Completed).HasColumnName("completed");
 
 
                 entity.HasOne(d => d.Restaurant)
@@ -114,6 +118,11 @@ namespace SGVRestaurantProject.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_booking_Restaurant");
 
+                entity.HasOne(d => d.BanquetMenu)
+                    .WithMany(p => p.Bookings)
+                    .HasForeignKey(d => d.BanquetMenuID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_booking_banquet");
                 entity.HasOne(d => d.Sitting)
                     .WithMany(p => p.Bookings)
                     .HasForeignKey(d => d.SittingId)

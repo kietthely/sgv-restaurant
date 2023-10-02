@@ -61,6 +61,7 @@ namespace SGVRestaurantProject.Controllers
         // GET: Bookings
         public async Task<IActionResult> UserIndex(string? userName)
         {
+
             var currentUser = await _userManager.FindByNameAsync(userName);
 
             var userId = currentUser.Id;
@@ -70,6 +71,7 @@ namespace SGVRestaurantProject.Controllers
                 .Where(u => u.DefaultUserId == userId)
                 .ToList();
             return View(bookingDetails);
+            
 
             //var sVGRestaurantContext = _context.Bookings
             //    .Include(b => b.Restaurant)
@@ -78,7 +80,36 @@ namespace SGVRestaurantProject.Controllers
             //    .Where(b => b.User.UserName == userName);
             //return View(await sVGRestaurantContext.ToListAsync());
         }
+        // GET: Points
+        public async Task<IActionResult> GetPoints(string? userName)
+        {
+            var currentUser = await _userManager.FindByNameAsync(userName);
+            BookingPoints bookingPoints = new BookingPoints();
+            var userId = currentUser.Id;
+            #region BookingDetailsQuery
 
+            var bookingDetails = _context.Bookings
+                .Include(r => r.Restaurant)
+                .Include(s => s.Sitting)
+                .Where(u => u.DefaultUserId == userId)
+                .ToList();
+            bookingPoints.BookingDetails = bookingDetails;
+            #endregion
+            #region GetPoints
+            // points logic
+            bookingPoints.Points = bookingDetails.Count();
+            bookingPoints.NumberOfBookings = bookingDetails.Count();
+            #endregion
+
+            return View(bookingPoints);
+
+            //var sVGRestaurantContext = _context.Bookings
+            //    .Include(b => b.Restaurant)
+            //    .Include(b => b.Sitting)
+            //    .Include(b => b.User)
+            //    .Where(b => b.User.UserName == userName);
+            //return View(await sVGRestaurantContext.ToListAsync());
+        }
         // GET: Bookings/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -133,7 +164,7 @@ namespace SGVRestaurantProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookingId,SittingId,DefaultUserId,RestaurantId")] Booking booking)
+        public async Task<IActionResult> Create([Bind("BookingId,SittingId,DefaultUserId,RestaurantId,BanquetMenuID,  NumberOfGuest, BookingDate, Completed")] Booking booking)
         {
             //if (ModelState.IsValid)
             //{
@@ -175,7 +206,7 @@ namespace SGVRestaurantProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookingId,SittingId,DefaultUserId,RestaurantId")] Booking booking)
+        public async Task<IActionResult> Edit(int id, [Bind("BookingId,SittingId,DefaultUserId,RestaurantId,BanquetMenuID, NumberOfGuest, BookingDate, Completed")] Booking booking)
         {
             //if (id != booking.BookingId)
             //{

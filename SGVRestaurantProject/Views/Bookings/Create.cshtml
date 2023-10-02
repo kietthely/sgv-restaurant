@@ -18,12 +18,24 @@
             </div>
             <div class="form-group p-1">
                 <label asp-for="DefaultUserId" class="control-label">Customer ID</label>
-                <select asp-for="DefaultUserId" class ="form-control" asp-items="ViewBag.DefaultUserId"></select>
+                <select asp-for="DefaultUserId" class="form-control form-control-plaintext" asp-items="ViewBag.DefaultUserId"></select>
             </div>
             <div class="form-group p-1">
                 @*<a href="c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml">c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml</a>*@
                 <label asp-for="RestaurantId" class="control-label">Restaurant Name</label>
-                <select asp-for="RestaurantId" class ="form-control" asp-items="ViewBag.RestaurantId"></select>
+                <select asp-for="RestaurantId" class="form-control form-control-plaintext" asp-items="ViewBag.RestaurantId"></select>
+            </div>
+            <div class="form-group p-1">
+                <label asp-for="NumberOfGuests" class="control-label">Number Of Guests</label>
+                <select asp-for="NumberOfGuests" class="form-control" asp-items="ViewBag.NumberOfGuests"></select>
+            </div>
+            <div class="form-group p-1">
+                <label asp-for="BookingDate" class="control-label">Booking Date</label>
+                <input asp-for="BookingDate" class="form-control" id="datepicker" readonly>
+            </div>
+            <div class="form-group p-1 visually-hidden">
+                <label asp-for="Completed" class="control-label">Completed</label>
+                <input asp-for="Completed" class="form-control" value="No">
             </div>
             <div class="form-group mt-2 p-1">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -34,5 +46,19 @@
 
 
 @section Scripts {
+    
+
+    <script>
+        $(document).ready(function () {
+            $('#datepicker').datepicker({
+                format: 'yyyy-mm-dd', // Adjust the format as needed
+                autoclose: true,
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -1,0 +1,57 @@
+﻿@model SGVRestaurantProject.Models.ViewModel.BookingPoints
+@{
+    ViewData["Title"] = "Booking Points";
+}
+
+
+<h1>
+    Current Reservations.
+</h1>
+<p>Points: @Model.Points</p>
+<p>Number Of Bookings: @Model.NumberOfBookings</p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Booking ID
+            </th>
+            <th>
+                Booked By
+            </th>
+
+            <th>
+                Sitting
+            </th>
+            <th>
+                Location
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.BookingDetails)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingId)
+                </td>
+                <td>
+                    @item.User.FirstName @item.User.LastName
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sitting.SittingType)
+                </td>
+                <td>
+                    @item.Restaurant.RestaurantName
+                </td>
+                <td>
+                    @*<a asp-action="Edit" asp-route-id="@item.RestaurantId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.RestaurantId">Details</a> |*@
+                    <a asp-controller="Bookings" asp-action="Delete" asp-route-id="@item.BookingId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
