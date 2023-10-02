@@ -29,6 +29,13 @@ namespace SGVRestaurantProject.Controllers
             return View(await sVGRestaurantContext.ToListAsync());
         }
 
+        // GET: Bookings for restaurant staff view. 
+        // Shows the current reservations made for a selected restaurant
+        public async Task<IActionResult> RestaurantBookings()
+        {
+            return View();
+        }
+
         // GET: Bookings
         public async Task<IActionResult> UserIndex(string? userName)
         {
