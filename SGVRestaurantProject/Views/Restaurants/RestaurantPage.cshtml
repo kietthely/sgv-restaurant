@@ -4,39 +4,43 @@
     ViewData["Title"] = "Restaurant Page";
 }
 
+
 <div class="text-center">
-    <h2>SVG RESTAURANTS</h2>
+    <h2>SGV RESTAURANTS</h2>
 </div>
 <br />
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col text-center">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body" style="height: 400px">
+        <div id="cards" class="card">
+            <img src="~/Photos/louis-hansel-U6-KvV7HlMk-unsplash.jpg" style="height: 282px" class="card-img-top" alt="...">
+            <div class="card-body">
+                <br />
                 <h5 class="card-title text-center">BAMBOOLEAF</h5>
                 <p class="card-text">Modern Asian Fusion in the heart of Adelaide.</p>
-                <a asp-controller="Restaurants" asp-action="Details" asp-route-id="1" class="btn btn-primary">Details</a>
+                <a asp-controller="Restaurants" asp-action="Details" asp-route-id="1" class="btn">Details</a>
             </div>
         </div>
     </div>
     <div class="col text-center">
-        <div class="card" style="height: 426px">
-            <img src="" class="card-img-top" alt="...">
+        <div id="cards" class="card">
+            <img src="~/Photos/korean-bbq-8064w.jpg" style="height: 282px" class="card-img-top" alt="...">
             <div class="card-body">
+                <br />
                 <h5 class="card-title">MEXIKANA</h5>
                 <p class="card-text">Korean Mexican fusion for the hipsters.</p>
-                <a asp-controller="Restaurants" asp-action="Details" asp-route-id="3" class="btn btn-primary">Details</a>
+                <a asp-controller="Restaurants" asp-action="Details" asp-route-id="3" class="btn">Details</a>
             </div>
         </div>
     </div>
     <div class="col text-center">
-        <div class="card" style="height: 426px">
-            <img src="..." class="card-img-top" alt="...">  
+        <div id="cards" class="card">
+            <img src="~/Photos/assorted-brazilian-appetizers.jpg" class="card-img-top" style="height: 282px" alt="...">
             <div class="card-body">
+                <br />
                 <h5 class="card-title">LA OESTE DE LA MAR</h5>
                 <p class="card-text">Vibrant Brazilian in the heart of Adelaide.</p>
-                <a asp-controller="Restaurants" asp-action="Details" asp-route-id="2" class="btn btn-primary">Details</a>
+                <a asp-controller="Restaurants" asp-action="Details" asp-route-id="2" class="btn">Details</a>
             </div>
         </div>
     </div>

@@ -26,4 +26,8 @@
     <Folder Include="Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Photos\korean-bbq-8064w.jpg" />
+  </ItemGroup>
+
 </Project>
