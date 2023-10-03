@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using SGVRestaurantProject.Models.Users;
 
 namespace SGVRestaurantProject.Models
@@ -28,14 +25,14 @@ namespace SGVRestaurantProject.Models
         public virtual DbSet<Sitting> Sittings { get; set; } = null!;
         public virtual DbSet<UserAccount> UserAccounts { get; set; } = null!;
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Data Source=MN-LAPLENO\\SQLEXPRESS;Initial Catalog=SvgRestaurant;Integrated Security=True");
-//            }
-//        }
+        //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //        {
+        //            if (!optionsBuilder.IsConfigured)
+        //            {
+        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        //                optionsBuilder.UseSqlServer("Data Source=MN-LAPLENO\\SQLEXPRESS;Initial Catalog=SvgRestaurant;Integrated Security=True");
+        //            }
+        //        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -100,7 +97,7 @@ namespace SGVRestaurantProject.Models
 
                 entity.Property(e => e.BookingId).HasColumnName("bookingID");
 
-               
+
 
                 entity.Property(e => e.SittingId).HasColumnName("sittingID");
 
@@ -111,6 +108,10 @@ namespace SGVRestaurantProject.Models
                 entity.Property(e => e.BookingDate).HasColumnName("bookingDate");
                 entity.Property(e => e.Completed).HasColumnName("completed");
 
+                entity.Property(e => e.BanquetMenuID).HasColumnName("banquetID");
+                entity.Property(e => e.NumberOfGuests).HasColumnName("numberOfGuest");
+                entity.Property(e => e.BookingDate).HasColumnName("bookingDate");
+                entity.Property(e => e.Completed).HasColumnName("completed");
 
                 entity.HasOne(d => d.Restaurant)
                     .WithMany(p => p.Bookings)
@@ -166,6 +167,21 @@ namespace SGVRestaurantProject.Models
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("restaurantName");
+
+                entity.Property(e => e.RestaurantEmail)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("restaurantEmail");
+
+                entity.Property(e => e.RestaurantPhoneNumber)
+                    .HasMaxLength(15)
+                    .IsUnicode(false)
+                    .HasColumnName("restaurantPhoneNumber");
+
+                entity.Property(e => e.ImageUrl)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("imageUrl");
             });
 
             modelBuilder.Entity<RestaurantBanquetMenu>(entity =>

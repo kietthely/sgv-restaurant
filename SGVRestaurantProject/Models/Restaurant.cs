@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SGVRestaurantProject.Models
+﻿namespace SGVRestaurantProject.Models
 {
     public partial class Restaurant
     {
@@ -16,7 +13,9 @@ namespace SGVRestaurantProject.Models
         public int RestaurantId { get; set; }
         public string RestaurantAddress { get; set; } = null!;
         public string RestaurantName { get; set; } = null!;
-
+        public string RestaurantEmail { get; set; } = null!;
+        public string RestaurantPhoneNumber { get; set; } = null!;
+        public string ImageUrl { get; set; } = null!;
         public virtual ICollection<BanquetMenu> BanquetMenus { get; set; }
         public virtual ICollection<Booking> Bookings { get; set; }
         public virtual ICollection<RestaurantBanquetMenu> RestaurantBanquetMenus { get; set; }

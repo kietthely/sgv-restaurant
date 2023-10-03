@@ -11,6 +11,8 @@
                 @Html.DisplayFor(model => model.theRestaurant.RestaurantName)
             </h1>
             <p>@Html.DisplayFor(model => model.theRestaurant.RestaurantAddress)</p>
+            <p>@Html.DisplayFor(model => model.theRestaurant.RestaurantEmail)</p>
+            <p>@Html.DisplayFor(model => model.theRestaurant.RestaurantPhoneNumber)</p>
         </div>
         <div>
             <a asp-controller="Bookings" asp-action="Create" asp-route-restaurantId ="@Model.theRestaurant.RestaurantId" class="btn btn-outline-light p">Make Reservation</a>
