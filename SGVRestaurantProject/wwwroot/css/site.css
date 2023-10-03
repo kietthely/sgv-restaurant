@@ -78,3 +78,20 @@ body {
     background-color: grey;
     color: white;
 }
+
+#registerAccountH2 {
+    margin-left: 45px;
+}
+
+#registerSubmit {
+    background-color: whitesmoke;
+    border: 1px solid grey;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#registerSubmit:hover {
+    background-color: grey;
+    color: white;
+}
+
