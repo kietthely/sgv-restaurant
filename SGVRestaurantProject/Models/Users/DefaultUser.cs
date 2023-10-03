@@ -20,6 +20,5 @@ namespace SGVRestaurantProject.Models.Users
         public DateTime UserCreationDate { get; set; } = DateTime.Now;
 
         public virtual ICollection<Booking>? Bookings { get; set; }
-        public virtual ICollection<UserAchievements>? UserAchievementsList { get; set; }
     }
 }
