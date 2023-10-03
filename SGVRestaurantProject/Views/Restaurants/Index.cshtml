@@ -1,22 +1,22 @@
 ﻿@model IEnumerable<SGVRestaurantProject.Models.Restaurant>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Restaurants";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn" asp-action="Create">Add a restaurant</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RestaurantAddress)
+                @Html.DisplayNameFor(model => model.RestaurantName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RestaurantName)
+                @Html.DisplayNameFor(model => model.RestaurantAddress)
             </th>
             <th></th>
         </tr>
@@ -25,16 +25,17 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.RestaurantName)
+
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.RestaurantAddress)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestaurantName)
-            </td>
-            <td>
-                <a asp-controller="Bookings" asp-action="RestaurantBookings" asp-route-restaurantId="@item.RestaurantId">View Bookings</a> |
-                <a asp-action="Edit" asp-route-id="@item.RestaurantId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RestaurantId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RestaurantId">Delete</a>
+                <td class="d-flex justify-content-end">
+                <a class="btn" asp-controller="Bookings" asp-action="RestaurantBookings" asp-route-restaurantId="@item.RestaurantId" style="margin-left: 3px;">View Bookings</a>
+                <a class="btn" asp-action="Edit" asp-route-id="@item.RestaurantId" style="margin-left: 3px;">Edit</a>
+                <a class="btn" asp-action="Details" asp-route-id="@item.RestaurantId" style="margin-left: 3px;">Details</a>
+                <a class="btn" asp-action="Delete" asp-route-id="@item.RestaurantId" style="margin-left: 3px;">Delete</a>
             </td>
         </tr>
 }
