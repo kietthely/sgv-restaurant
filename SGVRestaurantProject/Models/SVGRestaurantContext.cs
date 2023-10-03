@@ -108,10 +108,6 @@ namespace SGVRestaurantProject.Models
                 entity.Property(e => e.BookingDate).HasColumnName("bookingDate");
                 entity.Property(e => e.Completed).HasColumnName("completed");
 
-                entity.Property(e => e.BanquetMenuID).HasColumnName("banquetID");
-                entity.Property(e => e.NumberOfGuests).HasColumnName("numberOfGuest");
-                entity.Property(e => e.BookingDate).HasColumnName("bookingDate");
-                entity.Property(e => e.Completed).HasColumnName("completed");
 
                 entity.HasOne(d => d.Restaurant)
                     .WithMany(p => p.Bookings)
