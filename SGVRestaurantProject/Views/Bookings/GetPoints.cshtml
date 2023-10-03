@@ -1,8 +1,15 @@
-﻿@model IEnumerable<SGVRestaurantProject.Models.Booking>
+﻿@model SGVRestaurantProject.Models.ViewModel.BookingPoints
+@{
+    ViewData["Title"] = "Booking Points";
+}
+
 
 <h1>
-Current Reservations.
+    Current Reservations.
 </h1>
+<p>Points: @Model.Points</p>
+<p>Number Of Bookings: @Model.NumberOfBookings</p>
+
 
 <table class="table">
     <thead>
@@ -13,7 +20,7 @@ Current Reservations.
             <th>
                 Booked By
             </th>
-            
+
             <th>
                 Sitting
             </th>
@@ -26,7 +33,7 @@ Current Reservations.
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.BookingDetails)
         {
             <tr>
                 <td>
@@ -34,7 +41,7 @@ Current Reservations.
                 </td>
                 <td>
                     @item.User.FirstName @item.User.LastName
-                    
+
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Sitting.SittingType)
@@ -42,7 +49,6 @@ Current Reservations.
                 <td>
                     @item.Restaurant.RestaurantName
                 </td>
-
                 <td>
                     @item.NumberOfGuests
                 </td>
@@ -50,7 +56,7 @@ Current Reservations.
                 <td>@item.Completed</td>
                 <td>
                     @*<a asp-action="Edit" asp-route-id="@item.RestaurantId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.RestaurantId">Details</a> |*@
+                <a asp-action="Details" asp-route-id="@item.RestaurantId">Details</a> |*@
                     <a asp-controller="Bookings" asp-action="Delete" asp-route-id="@item.BookingId">Delete</a>
                 </td>
             </tr>

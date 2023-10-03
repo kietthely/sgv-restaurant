@@ -19,6 +19,7 @@ namespace SGVRestaurantProject.Models
 
         public virtual Restaurant Restaurant { get; set; } = null!;
         public virtual ICollection<BanquetAndMenuItem> BanquetAndMenuItems { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
         public virtual ICollection<RestaurantBanquetMenu> RestaurantBanquetMenus { get; set; }
     }
 }
