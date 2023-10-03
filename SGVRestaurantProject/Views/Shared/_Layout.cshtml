@@ -32,7 +32,14 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="MenuItems" asp-action="Index">Menu Items</a>
                             </li>
                         }
-                        
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        @if (User.IsInRole("Customer"))
+                        {
+                            <li class="nav-item">
+                                    
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial"/>
                 </div>
