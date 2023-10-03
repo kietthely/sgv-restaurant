@@ -153,3 +153,13 @@ body {
 .table tbody tr {
     border-bottom: 1px solid #dddddd;
 }
+
+#restaurantDetailsImage {
+    margin-top: 80px;
+    margin-left: 40px;
+    color: white;
+}
+
+#restaurantDetailsButton {
+    margin-top:40px;
+}
