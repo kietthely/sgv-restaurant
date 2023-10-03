@@ -41,7 +41,7 @@ html {
     transition: 0.3s ease;
 }
 
-h2 {
+h1, h2 {
     color: rgba(000,000,000, 0.6);
     font-family: 'Helvetica Neue', sans-serif;
     font-size: 40px;
@@ -79,8 +79,20 @@ body {
     color: white;
 }
 
-#registerAccountH2 {
+#registerAccountH2, #createBanquetH1, #createRestaurantH1{
     margin-left: 45px;
+}
+
+#createMenuItemH1 { 
+    margin-left: 35px;
+}
+
+#editMenuItemH1 {
+    margin-left: 70px;
+}
+
+#editRestaurantDetailsH1 {
+    margin-left: 15px;
 }
 
 #registerSubmit {
@@ -107,4 +119,37 @@ body {
 
 .nav-link.text-light {
     font-family: 'Helvetica Neue', sans-serif;
+}
+
+#profile, #email, #change-password, #personal-data {
+    color: black;
+}
+
+.display-5.fw-bold {
+    color: white;
+}
+
+
+.table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.table thead tr {
+    background-color: rgba(52, 58, 64, 1);
+    color: #ffffff;
+    text-align: left;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #dddddd;
 }

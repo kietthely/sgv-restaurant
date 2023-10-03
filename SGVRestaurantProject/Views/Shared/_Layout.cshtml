@@ -25,7 +25,7 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Restaurants" asp-action="Index">Restaurants</a>
-                            </li>
+                            </li>   
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="BanquetMenus" asp-action="Index">Banquets</a>
                             </li>
@@ -33,7 +33,16 @@
                                 <a class="nav-link text-light" asp-area="" asp-controller="MenuItems" asp-action="Index">Menu Items</a>
                             </li>
                         }
+                        else if (User.IsInRole("Customer"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="Bookings" asp-action="UserIndex" asp-route-userName="@User.Identity.Name">Bookings</a>
+                            </li>
 
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="Bookings" asp-action="UserIndex" asp-route-userName="@User.Identity.Name">Points and Achievements</a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
