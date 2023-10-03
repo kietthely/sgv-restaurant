@@ -267,6 +267,35 @@ namespace SGVRestaurantProject.Models
                     .IsUnicode(false)
                     .HasColumnName("userType");
             });
+            modelBuilder.Entity<Achievements>(entity => {
+                entity.HasKey(e => e.AchievementId).HasName("pk_achievement");
+                entity.ToTable("Achievements");
+                entity.Property(e => e.AchievementId).HasColumnName("achievementId");
+                entity.Property(e => e.AchievementName).HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("achievementName");
+
+            });
+            modelBuilder.Entity<UserAchievements>(entity => {
+                entity.HasKey(e => e.UserAchievementsId).HasName("pk_userachievement");
+                entity.ToTable("UserAchievements");
+                entity.Property(e => e.AchievementId).HasColumnName("achievementId");
+
+                entity.Property(e => e.UserId).HasColumnName("userId");
+
+                entity.HasOne(d => d.Achievements)
+                    .WithMany(e =>e.UserAchievements)
+                    .HasForeignKey(d => d.AchievementId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_userachievement_achievement");
+                entity.HasOne(d => d.User)
+                    .WithMany(e => e.UserAchievementsList)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_userachievement_user");
+            });
+
+
 
             OnModelCreatingPartial(modelBuilder);
         }
