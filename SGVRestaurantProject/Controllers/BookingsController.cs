@@ -97,7 +97,8 @@ namespace SGVRestaurantProject.Controllers
             #endregion
             #region GetPoints
             // points logic
-            bookingPoints.Points = bookingDetails.Count();
+            var completedBooking = bookingDetails.Where(c => c.Completed == "Yes");
+            bookingPoints.Points = completedBooking.Count();
             bookingPoints.NumberOfBookings = bookingDetails.Count();
             #endregion
 
@@ -151,11 +152,14 @@ namespace SGVRestaurantProject.Controllers
             var filteredUser = _context.Users
                 .Where(u => u.UserName == currentUser)
                 .ToList();
-
-
+            var filteredBanquetMenu = _context.BanquetMenus
+                .Where(b => b.RestaurantId == restaurantId).ToList();
             ViewData["RestaurantId"] = new SelectList(filteredRestaurant, "RestaurantId", "RestaurantName");
             ViewData["SittingId"] = new SelectList(filteredSittings, "Value", "Text");
             ViewData["DefaultUserId"] = new SelectList(filteredUser, "Id", "UserName");
+            ViewData["BanquetList"] = new SelectList(filteredBanquetMenu, "BanquetId", "BanquetName");
+            ViewBag.UserName = filteredUser.FirstOrDefault()?.UserName;
+            ViewBag.RestaurantName = filteredRestaurant.FirstOrDefault()?.RestaurantName;
             return View();
         }
 
@@ -164,7 +168,7 @@ namespace SGVRestaurantProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookingId,SittingId,DefaultUserId,RestaurantId,BanquetMenuID,  NumberOfGuest, BookingDate, Completed")] Booking booking)
+        public async Task<IActionResult> Create([Bind("BookingId,SittingId,DefaultUserId,RestaurantId,BanquetMenuID,  NumberOfGuests, BookingDate, Completed")] Booking booking)
         {
             //if (ModelState.IsValid)
             //{

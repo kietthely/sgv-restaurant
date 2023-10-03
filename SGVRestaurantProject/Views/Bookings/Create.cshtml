@@ -18,16 +18,26 @@
             </div>
             <div class="form-group p-1">
                 <label asp-for="DefaultUserId" class="control-label">Customer ID</label>
-                <input asp-for="DefaultUserId" class="form-control form-control-plaintext" value="ViewBag.DefaultUserId">
+                <select asp-for="DefaultUserId" class="form-control form-control-plaintext visually-hidden" asp-items="ViewBag.DefaultUserId"></select>
+                <text class="form-control-plaintext">@ViewBag.UserName</text>
             </div>
             <div class="form-group p-1">
                 @*<a href="c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml">c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml</a>*@
                 <label asp-for="RestaurantId" class="control-label">Restaurant Name</label>
-                <input asp-for="RestaurantId" class="form-control form-control-plaintext" value="ViewBag.RestaurantId">
+                <select asp-for="RestaurantId" class="form-control form-control-plaintext visually-hidden" asp-items="ViewBag.RestaurantId"></select>
+                <text class="form-control-plaintext">@ViewBag.RestaurantName</text>
             </div>
             <div class="form-group p-1">
+                @*<a href="c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml">c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml</a>*@
+                <label asp-for="BanquetMenuID" class="control-label">Banquet Name</label>
+                <select asp-for="BanquetMenuID" class="form-control form-control-plaintext" asp-items="ViewBag.BanquetList"></select>
+                
+            </div>
+
+
+            <div class="form-group p-1">
                 <label asp-for="NumberOfGuests" class="control-label">Number Of Guests</label>
-                <select asp-for="NumberOfGuests" class="form-control" asp-items="ViewBag.NumberOfGuests"></select>
+                <input asp-for="NumberOfGuests" class="form-control" placeholder="Enter number of guests.."></input>
             </div>
             <div class="form-group p-1">
                 <label asp-for="BookingDate" class="control-label">Booking Date</label>

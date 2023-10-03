@@ -27,6 +27,9 @@
             <th>
                 Location
             </th>
+            <th>Number Of Guests</th>
+            <th>Booking Date</th>
+            <th>Completed</th>
         </tr>
     </thead>
     <tbody>
@@ -46,6 +49,11 @@
                 <td>
                     @item.Restaurant.RestaurantName
                 </td>
+                <td>
+                    @item.NumberOfGuests
+                </td>
+                <td>@item.BookingDate</td>
+                <td>@item.Completed</td>
                 <td>
                     @*<a asp-action="Edit" asp-route-id="@item.RestaurantId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.RestaurantId">Details</a> |*@
