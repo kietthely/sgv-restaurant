@@ -15,6 +15,7 @@
         public string RestaurantName { get; set; } = null!;
         public string RestaurantEmail { get; set; } = null!;
         public string RestaurantPhoneNumber { get; set; } = null!;
+        public string ImageUrl { get; set; } = null!;
         public virtual ICollection<BanquetMenu> BanquetMenus { get; set; }
         public virtual ICollection<Booking> Bookings { get; set; }
         public virtual ICollection<RestaurantBanquetMenu> RestaurantBanquetMenus { get; set; }
