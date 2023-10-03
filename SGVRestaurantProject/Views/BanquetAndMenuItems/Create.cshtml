@@ -18,17 +18,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="BanquetId" class="control-label"></label>
-                <select asp-for="BanquetId" class ="form-control" asp-items="ViewBag.BanquetId"></select>
+                <select asp-for="BanquetId" class="form-control" asp-items="ViewBag.BanquetId" style="margin-bottom: 10px"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input class="btn" type="submit" value="Create"/>
+                <a class="btn" asp-controller="MenuItems" asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
