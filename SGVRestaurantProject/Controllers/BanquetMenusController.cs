@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using static SGVRestaurantProject.Models.ViewModel.BanquetMenuViewModel;
 
 namespace SGVRestaurantProject.Controllers
 {
+    [Authorize(Roles ="Admin, Staff")]
     public class BanquetMenusController : Controller
     {
         private readonly SVGRestaurantContext _context;

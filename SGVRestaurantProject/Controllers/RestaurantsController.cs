@@ -22,12 +22,15 @@ namespace SGVRestaurantProject.Controllers
         }
 
         // GET: Restaurants
+        [Authorize(Roles ="Admin, Staff")]
         public async Task<IActionResult> Index()
         {
               return _context.Restaurants != null ? 
                           View(await _context.Restaurants.ToListAsync()) :
                           Problem("Entity set 'SVGRestaurantContext.Restaurants'  is null.");
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> RestaurantPage()
         {
             var query = _context.Restaurants;
@@ -36,6 +39,7 @@ namespace SGVRestaurantProject.Controllers
         }
 
         // GET: Restaurants/Details/5
+        [Authorize(Roles ="Admin, Staff")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Restaurants == null)
@@ -74,6 +78,7 @@ namespace SGVRestaurantProject.Controllers
         }
 
         // GET: Restaurants/Create
+        [Authorize(Roles ="Admin")]
         public IActionResult Create()
         {
             return View();
@@ -96,6 +101,7 @@ namespace SGVRestaurantProject.Controllers
         }
 
         // GET: Restaurants/Edit/5
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Restaurants == null)
@@ -114,6 +120,7 @@ namespace SGVRestaurantProject.Controllers
         // POST: Restaurants/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles ="Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("RestaurantId,RestaurantAddress,RestaurantName")] Restaurant restaurant)
@@ -147,6 +154,7 @@ namespace SGVRestaurantProject.Controllers
         }
 
         // GET: Restaurants/Delete/5
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Restaurants == null)
@@ -165,6 +173,7 @@ namespace SGVRestaurantProject.Controllers
         }
 
         // POST: Restaurants/Delete/5
+        [Authorize(Roles ="Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
