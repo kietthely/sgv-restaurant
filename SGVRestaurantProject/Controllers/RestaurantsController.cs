@@ -39,7 +39,7 @@ namespace SGVRestaurantProject.Controllers
         }
 
         // GET: Restaurants/Details/5
-        [Authorize(Roles ="Admin, Staff")]
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Restaurants == null)
