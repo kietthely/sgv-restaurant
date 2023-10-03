@@ -4,10 +4,10 @@
     ViewData["Title"] = "Banquets";
 }
 
-<h1>BANQUETS</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
-    <a class="btn btn-outline-primary" asp-action="Create">Add new banquet</a>
+    <a class="btn " asp-action="Create">Add new banquet</a>
 </p>
 <table class="table">
     <thead>
@@ -60,10 +60,10 @@
                         <p>Not currently available</p>
                     }
                 </td>
-                <td>
+                <td class="d-flex justify-content-end">
                     @* <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.BanquetId">Edit</a> *@
                     @* <a class="btn btn-outline-primary" asp-controller="BanquetAndMenuItems" asp-action="Index" asp-route-banquetId="@item.BanquetId">Edit Items</a> *@
-                    <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.BanquetId">Details</a>
+                    <a class="btn" asp-action="Details" asp-route-id="@item.BanquetId" style="margin-right: 3px;">Details</a>
                     <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.BanquetId">Delete</a>
                 </td>
             </tr>
