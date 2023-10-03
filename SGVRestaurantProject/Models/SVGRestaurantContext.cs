@@ -24,6 +24,9 @@ namespace SGVRestaurantProject.Models
         public virtual DbSet<RestaurantSitting> RestaurantSittings { get; set; } = null!;
         public virtual DbSet<Sitting> Sittings { get; set; } = null!;
         public virtual DbSet<UserAccount> UserAccounts { get; set; } = null!;
+        public virtual DbSet<Achievements> Achievements { get; set; } = null!;
+
+        public virtual DbSet<UserAchievements> UserAchievements { get; set; } = null!;
 
         //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //        {
@@ -267,6 +270,12 @@ namespace SGVRestaurantProject.Models
                     .IsUnicode(false)
                     .HasColumnName("userType");
             });
+
+             modelBuilder.Entity<Achievements>(entity =>
+                {
+                    entity.HasKey(e => e.AchievementId);
+                }
+            );
 
             OnModelCreatingPartial(modelBuilder);
         }
