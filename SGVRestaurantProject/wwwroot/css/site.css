@@ -79,7 +79,7 @@ body {
     color: white;
 }
 
-#registerAccountH2 {
+#registerAccountH2, #createBanquetH1, #createRestaurantH1 {
     margin-left: 45px;
 }
 
@@ -117,6 +117,4 @@ body {
     color: white;
 }
 
-#createBanquetH1 {
-    margin-left: 45px;
-}
+
