@@ -21,12 +21,24 @@ html {
     margin-bottom: 8px;
 }
 
+.navbar-brand:hover {
+    transform: scale(1.10);
+    box-shadow: 5px 5px 15px rgb(0, 0, 0, 0.6);
+    transition: 0.3s ease;
+}
+
 #register, #login {
     font-family: 'Helvetica Neue', sans-serif;
     letter-spacing: 1px;
     line-height: 1;
     margin-top: 8px;
     margin-bottom: 8px;
+}
+
+#register:hover, #login:hover {
+    transform: scale(1.10);
+    box-shadow: 5px 5px 15px rgb(0, 0, 0, 0.6);
+    transition: 0.3s ease;
 }
 
 h2 {
@@ -58,10 +70,11 @@ body {
 .btn {
     background-color: whitesmoke;
     border: 1px solid grey;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .btn:hover {
     background-color: grey;
     color: white;
-        
 }
