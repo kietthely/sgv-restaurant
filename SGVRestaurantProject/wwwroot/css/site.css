@@ -91,6 +91,10 @@ body {
     margin-left: 70px;
 }
 
+#editRestaurantDetailsH1 {
+    margin-left: 15px;
+}
+
 #registerSubmit {
     background-color: whitesmoke;
     border: 1px solid grey;
@@ -126,3 +130,26 @@ body {
 }
 
 
+.table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.table thead tr {
+    background-color: rgba(52, 58, 64, 1);
+    color: #ffffff;
+    text-align: left;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
