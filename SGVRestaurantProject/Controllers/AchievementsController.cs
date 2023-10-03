@@ -57,13 +57,9 @@ namespace SGVRestaurantProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AchievementId,AchievementName")] Achievements achievements)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(achievements);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(achievements);
+            _context.Add(achievements);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Achievements/Edit/5
