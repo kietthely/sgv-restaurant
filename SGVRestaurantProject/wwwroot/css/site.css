@@ -108,3 +108,8 @@ body {
 .nav-link.text-light {
     font-family: 'Helvetica Neue', sans-serif;
 }
+
+#profile, #email, #change-password, #personal-data {
+    color: black;
+}
+
