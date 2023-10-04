@@ -72,6 +72,13 @@ namespace SGVRestaurantProject.Controllers
                 .Include(s => s.Sitting)
                 .Where(u => u.DefaultUserId == userId)
                 .ToList();
+            if (User.IsInRole("Admin") || User.IsInRole("Staff")) {
+                 bookingDetails = _context.Bookings
+                    .Include(r => r.Restaurant)
+                    .Include(s => s.Sitting).ToList();
+
+            }
+            
             return View(bookingDetails);
             
 
@@ -201,8 +208,20 @@ namespace SGVRestaurantProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId", booking.RestaurantId);
-            ViewData["SittingId"] = new SelectList(_context.Sittings, "SittingId", "SittingId", booking.SittingId);
+            var restaurantId = booking.RestaurantId;
+            var currentUser = User.Identity.Name;
+
+            var filteredRestaurant = _context.Restaurants.Where(r => r.RestaurantId == restaurantId).ToList();
+
+            ViewBag.RestaurantName = filteredRestaurant.FirstOrDefault()?.RestaurantName;
+            ViewBag.bookingDate = booking.BookingDate;
+            ViewBag.numberOfGuests = booking.NumberOfGuests;
+            var filteredBanquetMenu = _context.BanquetMenus
+                .Where(b => b.RestaurantId == restaurantId).ToList();
+
+            ViewData["BanquetList"] = new SelectList(filteredBanquetMenu, "BanquetId", "BanquetName");
+            ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantName", booking.RestaurantId);
+            ViewData["SittingId"] = new SelectList(_context.Sittings, "SittingId", "SittingType", booking.SittingId);
             ViewData["DefaultUserId"] = new SelectList(_context.Users, "Id", "Id", booking.DefaultUserId);
             return View(booking);
         }
@@ -238,7 +257,7 @@ namespace SGVRestaurantProject.Controllers
                     throw;
                 }
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("RestaurantPage", "Restaurants");
 
             //ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId", booking.RestaurantId);
             //ViewData["SittingId"] = new SelectList(_context.Sittings, "SittingId", "SittingId", booking.SittingId);

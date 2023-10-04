@@ -18,8 +18,8 @@
                 <span asp-validation-for="BanquetName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RestaurantId" class="control-label">Restaurant id</label>
-                <input asp-for="RestaurantId" class="form-control" />
+                <label asp-for="RestaurantId" class="control-label">Restaurant Name</label>
+                <select asp-for="RestaurantId" class="form-control" asp-items="ViewBag.RestaurantList"></select>
                 <span asp-validation-for="RestaurantId" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -89,6 +89,12 @@ namespace SGVRestaurantProject.Controllers
         // GET: BanquetMenus/Create
         public IActionResult Create()
         {
+
+            var restaurantList = _context.Restaurants;
+
+            // Create a SelectList with the selected item
+
+            ViewData["RestaurantList"] = new SelectList(restaurantList, "RestaurantId", "RestaurantName");
             return View();
         }
 
