@@ -72,14 +72,14 @@ namespace SGVRestaurantProject.Controllers
         .Where(m => m.ItemId == menuItemId)
         .Select(i => i.ItemName)
         .FirstOrDefault();
-
+            var itemList = _context.MenuItems.Where(m => m.ItemId == menuItemId).ToList();
             // Create a SelectList with the selected item
 
             ViewData["menuItemId"]= menuItemId;
             ViewData["menuItemName"] = itemName;
-            ViewData["BanquetId"] = new SelectList(_context.BanquetMenus, "BanquetId", "BanquetId");
+            ViewData["BanquetId"] = new SelectList(_context.BanquetMenus, "BanquetId", "BanquetName");
          
-            ViewData["ItemId"] = new SelectList(_context.MenuItems, "ItemId", "ItemId");
+            ViewData["ItemId"] = new SelectList(itemList, "ItemId", "ItemName");
             return View();
         }
 
