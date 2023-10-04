@@ -7,12 +7,17 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/sgv_web_app.styles.css" asp-append-version="true" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
 </head>
 <body>
     <header>
-        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">*@
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="container d-flex justify-content-between">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Restaurants" asp-action="RestaurantPage">SGV</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -20,34 +25,30 @@
                 </button>
 
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
                     <ul class="navbar-nav flex-grow-1">
                         @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Restaurants" asp-action="Index">Restaurants</a>
-                            </li>   
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="BanquetMenus" asp-action="Index">Banquets</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Restaurants" asp-action="Index">Restaurants</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="MenuItems" asp-action="Index">Menu Items</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="BanquetMenus" asp-action="Index">Banquets</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Points" asp-action="Points" >Customer Points</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="MenuItems" asp-action="Index">Menu Items</a>
                             </li>
                         }
-                        else if (User.IsInRole("Customer"))
+                        @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Bookings" asp-action="UserIndex" asp-route-userName="@User.Identity.Name">Bookings</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Achievements" asp-action="Index">View Acheiements</a>
                             </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="UserAchievements" asp-action="Index" asp-route-userName="@User.Identity.Name">Achievements</a>
-                            </li>
-                            
                         }
                     </ul>
+                    <ul class="navbar-nav ml-auto" id="tier">
+                    </ul>
+
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -61,12 +62,34 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - Soylent Green Ventures (SGV)
+            &copy; 2023 - sgv_web_app - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        fetch(`/api/TiersAPI/?userName=${encodeURIComponent('@User.Identity.Name')}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(tier => {
+                const displayTier = document.createElement('li');
+                displayTier.classList.add('nav-item');
+                displayTier.innerHTML = `<a class="nav-link text-dark">${tier}</a>`;
+                const tierNav = document.getElementById('tier');
+                tierNav.appendChild(displayTier);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    </script>
 </body>
 </html>
