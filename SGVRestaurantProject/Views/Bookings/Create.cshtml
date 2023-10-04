@@ -10,36 +10,34 @@
         <hr />
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group p-1">
-                <label asp-for="SittingId" class="control-label">Sitting times</label>
-                <select asp-for="SittingId" class="form-control" asp-items='ViewBag.SittingId'></select>
+            <div class="row form-group p-1">
+                <label asp-for="SittingId" class="col control-label">Sitting times</label>
+                <select asp-for="SittingId" class="col form-control" asp-items='ViewBag.SittingId'></select>
             </div>
-            <div class="form-group p-1">
-                <label asp-for="DefaultUserId" class="control-label">Customer ID</label>
+            <div class="row form-group p-1">
+                <label asp-for="DefaultUserId" class="col control-label">Customer ID</label>
                 <select asp-for="DefaultUserId" class="form-control form-control-plaintext visually-hidden" asp-items="ViewBag.DefaultUserId"></select>
-                <text class="form-control-plaintext">@ViewBag.UserName</text>
+                <text class="col form-control">@ViewBag.UserName</text>
             </div>
-            <div class="form-group p-1">
+            <div class="row form-group p-1">
                 @*<a href="c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml">c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml</a>*@
-                <label asp-for="RestaurantId" class="control-label">Restaurant Name</label>
+                <label asp-for="RestaurantId" class="col control-label">Restaurant Name</label>
                 <select asp-for="RestaurantId" class="form-control form-control-plaintext visually-hidden" asp-items="ViewBag.RestaurantId"></select>
-                <text class="form-control-plaintext">@ViewBag.RestaurantName</text>
+                <text class="col form-control">@ViewBag.RestaurantName</text>
             </div>
-            <div class="form-group p-1">
+            <div class="row form-group p-1">
                 @*<a href="c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml">c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml</a>*@
-                <label asp-for="BanquetMenuID" class="control-label">Banquet Name</label>
-                <select asp-for="BanquetMenuID" class="form-control form-control-plaintext" asp-items="ViewBag.BanquetList"></select>
-                
+                <label asp-for="BanquetMenuID" class="col control-label">Banquet Name</label>
+                <select asp-for="BanquetMenuID" class="col form-control" asp-items="ViewBag.BanquetList"></select>
             </div>
 
-
-            <div class="form-group p-1">
-                <label asp-for="NumberOfGuests" class="control-label">Number Of Guests</label>
-                <input asp-for="NumberOfGuests" class="form-control" placeholder="Enter number of guests.." value="ViewBag.numberOfGuests">
+            <div class="row form-group p-1">
+                <label asp-for="NumberOfGuests" class="col control-label">Number Of Guests</label>
+                <input asp-for="NumberOfGuests" class="col form-control" min="0" max="12" placeholder="Enter number of guests..">
             </div>
-            <div class="form-group p-1">
-                <label asp-for="BookingDate" class="control-label">Booking Date</label>
-                <input asp-for="BookingDate" class="form-control" id="datepicker" value="@ViewBag.bookingDate" readonly>
+            <div class="row form-group p-1">
+                <label asp-for="BookingDate" class="col control-label">Booking Date</label>
+                <input asp-for="BookingDate" class="col form-control" id="datepicker" readonly>
             </div>
             <div class="form-group p-1">
                 <label asp-for="Completed" class="control-label">Completed</label>
