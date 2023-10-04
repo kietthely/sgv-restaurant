@@ -24,8 +24,7 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn" />
-                <a class="btn" asp-controller="BanquetAndMenuItems" asp-action="Index">Back to List</a>
-
+                <a class="btn" asp-controller="BanquetAndMenuItems" asp-action="Index" asp-route-banquetId="@Model.Banquet.BanquetId">Back to List</a>
             </div>
         </form>
     </div>

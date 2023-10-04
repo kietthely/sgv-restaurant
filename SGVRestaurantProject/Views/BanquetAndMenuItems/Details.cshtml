@@ -32,7 +32,7 @@
             </table>
         </div>
         <a class="btn" asp-action="Edit" asp-route-id="@Model?.BanquetAndMenuItemsId">Edit</a>
-        <a class="btn" asp-action="Index">Back to List</a>
+        <a class="btn" asp-controller="BanquetAndMenuItems" asp-action="Index" asp-route-banquetId="@Model.Banquet.BanquetId">Back to List</a>
     </div>
 </div>
 
