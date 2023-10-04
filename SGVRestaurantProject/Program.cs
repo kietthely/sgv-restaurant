@@ -71,7 +71,7 @@ using (var scope = app.Services.CreateScope())
     string adminEmail = "admin@sgv.com";
     string adminPassword = "Admin1234!";
 
-    if(await userManager.FindByEmailAsync(adminEmail) == null)
+    if (await userManager.FindByEmailAsync(adminEmail) == null)
     {
         var user = new DefaultUser();
         user.UserName = adminEmail;
@@ -84,7 +84,7 @@ using (var scope = app.Services.CreateScope())
 
         await userManager.AddToRoleAsync(user, "Admin");
     }
-
+   
     string staffEmail = "staff@sgv.com";
     string staffPassword = "Staff1234!";
 

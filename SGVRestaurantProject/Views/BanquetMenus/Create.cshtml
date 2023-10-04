@@ -13,17 +13,17 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="BanquetName" class="control-label"></label>
+                <label asp-for="BanquetName" class="control-label">Banquet Name</label>
                 <input asp-for="BanquetName" class="form-control" />
                 <span asp-validation-for="BanquetName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RestaurantId" class="control-label"></label>
-                <input asp-for="RestaurantId" class="form-control" />
+                <label asp-for="RestaurantId" class="control-label">Restaurant Name</label>
+                <select asp-for="RestaurantId" class="form-control" asp-items="ViewBag.RestaurantList" />
                 <span asp-validation-for="RestaurantId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BanquetCost" class="control-label"></label>
+                <label asp-for="BanquetCost" class="control-label">Banquet Cost</label>
                 <input asp-for="BanquetCost" class="form-control" />
                 <span asp-validation-for="BanquetCost" class="text-danger"></span>
             </div>
