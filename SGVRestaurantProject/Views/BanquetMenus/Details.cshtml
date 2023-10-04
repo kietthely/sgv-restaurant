@@ -5,47 +5,53 @@
 
 }
 
-<h1>Banquet Details</h1>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h1 style="margin-left: 270px;">Banquet Details</h1>
+        <hr>
 
-<div>
-    @*<h4>BanquetMenu</h4>*@
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @*@Html.DisplayNameFor(model => model.BanquetName)*@
-            Banquet Name
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BanquetName)
-        </dd>
-        <dt class="col-sm-2">
-            Restaurant id
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RestaurantId)
-        </dd>
-        
-        <dt class="col-sm-2">
-            @*@Html.DisplayNameFor(model => model.BanquetCost)*@
-            Cost
-        </dt>
-        <dd class="col-sm-10">
-            $@Html.DisplayFor(model => model.BanquetCost)
-        </dd>
-        <dt class="col-sm-2">
-            @*@Html.DisplayNameFor(model => model.BanquetAvailability)*@
-            Availability
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BanquetAvailability)
-        </dd>
-    </dl>
+        <div class="col-8" style="margin-left: 150px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Banquet Name</th>
+                        <th>Restaurant id</th>
+                        <th>Cost</th>
+                        <th>Avaliability</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => model.BanquetName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.RestaurantId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.BanquetCost)
+                        </td>
+                        <td>
+                            @if (Model.BanquetAvailability == true)
+                            {
+                                <p>Avaliable</p>
+                            }
+                            else
+                            {
+                                <p>Not currently avaliable</p>
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            @* <a class="btn btn-outline-primary" asp-controller="MenuItems" asp-action="Create">Add menu items</a>  *@
+            <a class="btn" asp-action="Edit" asp-route-id="@Model?.BanquetId">Edit details</a>
+            <a class="btn" asp-controller="BanquetAndMenuItems" asp-action="Index" asp-route-banquetId="@Model?.BanquetId">Edit Items</a>
+            <a class="btn" asp-action="Index">Back to List</a>
+        </div>
+    </div>
 </div>
 
 
-<div>
-    @* <a class="btn btn-outline-primary" asp-controller="MenuItems" asp-action="Create">Add menu items</a>  *@
-    <a class="btn" asp-action="Edit" asp-route-id="@Model?.BanquetId">Edit details</a> 
-    <a class="btn" asp-controller="BanquetAndMenuItems" asp-action="Index" asp-route-banquetId="@Model?.BanquetId">Edit Items</a> 
-    <a class="btn" asp-action="Index">Back to List</a>
-</div>
