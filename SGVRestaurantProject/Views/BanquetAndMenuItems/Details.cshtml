@@ -4,27 +4,35 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h1 style="margin-left: 170px;">Banquet Menu Item Details</h1>
+        <hr />
 
-<div>
-    <h4>BanquetAndMenuItem</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Banquet)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Banquet.BanquetId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Item)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Item.ItemId)
-        </dd>
-    </dl>
+        <div class="col-4">
+            <table class="table" style="margin-left: 200px;">
+                <thead>
+                    <tr>
+                        <th>Banquet</th>
+                        <th>Item</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Item)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Item.ItemId)
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a class="btn" asp-action="Edit" asp-route-id="@Model?.BanquetAndMenuItemsId">Edit</a>
+        <a class="btn" asp-controller="BanquetAndMenuItems" asp-action="Index" asp-route-banquetId="@Model.Banquet.BanquetId">Back to List</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.BanquetAndMenuItemsId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+

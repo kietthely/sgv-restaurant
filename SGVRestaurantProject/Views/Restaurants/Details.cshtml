@@ -2,39 +2,53 @@
 
 @{
     ViewData["Title"] = "Details";
+
+    var imageUrl = Model.theRestaurant != null ? Model.theRestaurant.ImageUrl : null;
+    var maskRGBA = Model.theRestaurant != null ? "background-color: rgba(0,0,0,0.6)" : "background-color:rgba(25,135,84,1)";
 }
 
-<div class="container py-4">
-    <div class="p-5 mb-4 text-white bg-dark rounded-3 mh-50">
-        <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold">
-                @Html.DisplayFor(model => model.theRestaurant.RestaurantName)
-            </h1>
-            <p>@Html.DisplayFor(model => model.theRestaurant.RestaurantAddress)</p>
-            <p>@Html.DisplayFor(model => model.theRestaurant.RestaurantEmail)</p>
-            <p>@Html.DisplayFor(model => model.theRestaurant.RestaurantPhoneNumber)</p>
-        </div>
-        <div>
-            <a asp-controller="Bookings" asp-action="Create" asp-route-restaurantId ="@Model.theRestaurant.RestaurantId" class="btn">Make Reservation</a>
-</div>
-    </div>
-    <div class="row align-items-md-stretch">
-        @foreach (var banquetMenu in Model.banquetMenus)
-        {
-            <div class="col-md-6 mb-4">
-                <div class="h-100 p-5 bg-light border rounded-3 ">
-                   
-                    <h2>@banquetMenu.BanquetName ($@banquetMenu.BanquetCost PP)</h2>
-                    <ul>
-                        @foreach (var bami in banquetMenu.BanquetAndMenuItems)
-                        {
-                            <li>@bami.Item.ItemName </li>
-                        }
-                    </ul>
+
+<div class="bg-image position-relative d-flex justify-content-center align-items-center rounded mb-4"
+     style="background-image: url(@imageUrl); height: 400px; background-position: center center; background-size: cover; border-radius: 4px;">
+
+    <div class="mask position-absolute top-0 end-0 bottom-0 start-0" style="@maskRGBA; border-radius: 4px;">
+            <div id="restaurantDetailsImage" class="row">
+                    @if (Model.theRestaurant != null)
+                    {
+                        <h1 class="display-5 fw-bold">
+                            @Html.DisplayFor(model => model.theRestaurant.RestaurantName)
+                        </h1>
+                        <p>@Html.DisplayFor(model => model.theRestaurant.RestaurantAddress)</p>
+                        <p>@Html.DisplayFor(model => model.theRestaurant.RestaurantEmail)</p>
+                        <p>@Html.DisplayFor(model => model.theRestaurant.RestaurantPhoneNumber)</p>
+                    }
+                    else
+                    {
+                        <h1 class="text-white">All countries</h1>
+                    }
+                <div>
+                    <a id="restaurantDetailsButton" asp-controller="Bookings" asp-action="Create" asp-route-restaurantId="@Model.theRestaurant.RestaurantId" class="btn">Make Reservation</a>
                 </div>
             </div>
-        }
     </div>
+</div>
+
+<div class="row align-items-md-stretch">
+    @foreach (var banquetMenu in Model.banquetMenus)
+    {
+        <div class="col-md-6 mb-4">
+            <div class="h-100 p-5 bg-light border rounded-3 ">
+
+                <h2>@banquetMenu.BanquetName ($@banquetMenu.BanquetCost PP)</h2>
+                <ul>
+                    @foreach (var bami in banquetMenu.BanquetAndMenuItems)
+                    {
+                        <li>@bami.Item.ItemName </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
 </div>
 
 

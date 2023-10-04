@@ -4,44 +4,42 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>EDIT BANQUET DETAILS</h1>
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <h1 style="margin-left: 75px;">Edit Banquet Details</h1>
+        <hr />
 
-@* <h4>BanquetMenu</h4> *@
-<hr />
-<div class="row">
-    <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BanquetId" />
             <div class="form-group">
-                <label asp-for="BanquetName" class="control-label">Banquet name</label>
+                <label asp-for="BanquetName" class="control-label">Banquet Name</label>
                 <input asp-for="BanquetName" class="form-control" />
                 <span asp-validation-for="BanquetName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RestaurantId" class="control-label">Restaurant</label>
+                <label asp-for="RestaurantId" class="control-label">Restaurant id</label>
                 <input asp-for="RestaurantId" class="form-control" />
                 <span asp-validation-for="RestaurantId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BanquetCost" class="control-label">Cost</label>
-                <input asp-for="BanquetCost" class="form-control" />
+                <label asp-for="BanquetCost" class="control-label">Banquet Cost</label>
+                <input asp-for="BanquetCost" class="form-control" style="margin-bottom: 15px;"/>
                 <span asp-validation-for="BanquetCost" class="text-danger"></span>
             </div>
+
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="BanquetAvailability" /> @Html.DisplayNameFor(model => model.BanquetAvailability)
+                    <input class="form-check-input" asp-for="BanquetAvailability" style="margin-bottom: 15px;"/> @Html.DisplayNameFor(model => model.BanquetAvailability)
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn" />
+                <a class="btn" asp-action="Index">Back to List</a>
             </div>
         </form>
-    </div>
-</div>
 
-<div>
-    <a class="btn btn-outline-primary mt-2" asp-action="Index">Back to List</a>
+    </div>
 </div>
 
 @section Scripts {
