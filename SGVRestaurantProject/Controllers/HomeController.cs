@@ -15,7 +15,7 @@ namespace SGVRestaurantProject.Controllers
 
         public IActionResult Index()
         {
-            return RedirectToAction("RestaurantPage", "Restaurants");
+            return View();
         }
 
         public IActionResult Privacy()
