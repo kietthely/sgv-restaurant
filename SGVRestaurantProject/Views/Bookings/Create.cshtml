@@ -14,7 +14,7 @@
                 <label asp-for="SittingId" class="col control-label">Sitting times</label>
                 <select asp-for="SittingId" class="col form-control" asp-items='ViewBag.SittingId'></select>
             </div>
-            <div class="row form-group p-1">
+            <div class="row form-group p-1 visually-hidden">
                 <label asp-for="DefaultUserId" class="col control-label">Customer ID</label>
                 <select asp-for="DefaultUserId" class="form-control form-control-plaintext visually-hidden" asp-items="ViewBag.DefaultUserId"></select>
                 <text class="col form-control">@ViewBag.UserName</text>
@@ -39,13 +39,10 @@
                 <label asp-for="BookingDate" class="col control-label">Booking Date</label>
                 <input asp-for="BookingDate" class="col form-control" id="datepicker" readonly>
             </div>
-            <div class="form-group p-1">
+            <div class="form-group p-1 visually-hidden">
                 <label asp-for="Completed" class="control-label">Completed</label>
-                <select asp-for="Completed" class="form-control">
-                    <option value="">Booking Status</option>
-                    <option value="No">No</option>
-                    <option value="Yes">Yes</option>
-                    </select>
+                <input asp-for="Completed" class="form-control" value="No"/>
+
             </div>
             <div class="form-group mt-2 p-1">
                 <input type="submit" value="Create" class="btn" />

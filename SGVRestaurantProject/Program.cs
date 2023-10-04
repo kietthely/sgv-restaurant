@@ -113,9 +113,7 @@ using (var scope = app.Services.CreateScope())
         user.FirstName = "Test";
         user.LastName = "TestTest";
         user.EmailConfirmed = true;
-
         await userManager.CreateAsync(user, testPassword);
-
         await userManager.AddToRoleAsync(user, "Customer");
     }
 
