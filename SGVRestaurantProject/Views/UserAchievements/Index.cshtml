@@ -1,0 +1,63 @@
+﻿@model SGVRestaurantProject.Models.UserAchievementsVM
+
+@{
+    ViewData["Title"] = "Index";
+
+    var user = "";
+    @if (Model.UserAchievements.Any())
+    {
+        user = Model.UserAchievements.First().User.FirstName + "'s";
+    }
+
+}
+
+<h1>
+    @user Achievements
+</h1>
+
+<table class="table w-50">
+    <thead>
+        <tr>
+            <th>
+                Your achievements
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.UserAchievements.Any())
+        {
+            @foreach (var item in Model.UserAchievements)
+            {
+                <tr>
+                    <td>@item.Achievements.AchievementName</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>You currently have earned no achievements</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<table class="table w-50">
+    <thead>
+        <tr>
+            <th>
+                All available achievements
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.AllAchievements)
+        {
+            <tr>
+                <td>@item.AchievementName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
