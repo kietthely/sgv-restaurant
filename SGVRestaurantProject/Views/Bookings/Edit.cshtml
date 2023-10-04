@@ -13,22 +13,41 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BookingId" />
-            <div class="form-group">
-                <label asp-for="SittingId" class="control-label"></label>
-                <select asp-for="SittingId" class="form-control" asp-items="ViewBag.SittingId"></select>
-                <span asp-validation-for="SittingId" class="text-danger"></span>
+            <div class="form-group p-1">
+                <label asp-for="SittingId" class="control-label">Sitting times</label>
+                <select asp-for="SittingId" class="form-control" asp-items='ViewBag.SittingId'></select>
             </div>
-            <div class="form-group">
-                <label asp-for="DefaultUserId" class="control-label"></label>
-                <select asp-for="DefaultUserId" class="form-control" asp-items="ViewBag.DefaultUserId"></select>
-                <span asp-validation-for="DefaultUserId" class="text-danger"></span>
+            <div class="form-group p-1">
+                <label asp-for="DefaultUserId" class="control-label">Customer ID</label>
+                <select asp-for="DefaultUserId" class="form-control form-control-plaintext visually-hidden" asp-items="ViewBag.DefaultUserId"></select>
+                <text class="form-control-plaintext">@ViewBag.UserName</text>
             </div>
-            <div class="form-group">
-                <label asp-for="RestaurantId" class="control-label"></label>
-                <select asp-for="RestaurantId" class="form-control" asp-items="ViewBag.RestaurantId"></select>
-                <span asp-validation-for="RestaurantId" class="text-danger"></span>
+            <div class="form-group p-1">
+                @*<a href="c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml">c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml</a>*@
+                <label asp-for="RestaurantId" class="control-label">Restaurant Name</label>
+                <select asp-for="RestaurantId" class="form-control form-control-plaintext visually-hidden" asp-items="ViewBag.RestaurantId"></select>
+                <text class="form-control-plaintext">@ViewBag.RestaurantName</text>
             </div>
-            <div class="form-group">
+            <div class="form-group p-1">
+                @*<a href="c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml">c:\users\mnguy\onedrive\documents\github\sgv-restaurant\sgvrestaurantproject\views\bookings\create.cshtml</a>*@
+                <label asp-for="BanquetMenuID" class="control-label">Banquet Name</label>
+                <select asp-for="BanquetMenuID" class="form-control form-control-plaintext" asp-items="ViewBag.BanquetList"></select>
+
+            </div>
+
+
+            <div class="form-group p-1">
+                <label asp-for="NumberOfGuests" class="control-label">Number Of Guests</label>
+                <input asp-for="NumberOfGuests" class="form-control" placeholder="Enter number of guests.."></input>
+            </div>
+            <div class="form-group p-1">
+                <label asp-for="BookingDate" class="control-label">Booking Date</label>
+                <input asp-for="BookingDate" class="form-control" id="datepicker" readonly>
+            </div>
+            <div class="form-group p-1 visually-hidden">
+                <label asp-for="Completed" class="control-label">Completed</label>
+                <input asp-for="Completed" class="form-control" value="No">
+            </div><div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

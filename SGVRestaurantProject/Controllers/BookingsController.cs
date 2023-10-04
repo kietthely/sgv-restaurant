@@ -72,6 +72,13 @@ namespace SGVRestaurantProject.Controllers
                 .Include(s => s.Sitting)
                 .Where(u => u.DefaultUserId == userId)
                 .ToList();
+            if (User.IsInRole("Admin") || User.IsInRole("Staff")) {
+                 bookingDetails = _context.Bookings
+                    .Include(r => r.Restaurant)
+                    .Include(s => s.Sitting).ToList();
+
+            }
+            
             return View(bookingDetails);
             
 
@@ -201,7 +208,17 @@ namespace SGVRestaurantProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId", booking.RestaurantId);
+            var restaurantId = booking.RestaurantId;
+            var currentUser = User.Identity.Name;
+            ViewBag.bookingDate = booking.BookingDate;
+            ViewBag.numberOfGuests = booking.NumberOfGuests;
+            ViewBag.RestaurantName = booking.Restaurant.RestaurantName;
+
+            var filteredBanquetMenu = _context.BanquetMenus
+                .Where(b => b.RestaurantId == restaurantId).ToList();
+
+            ViewData["BanquetList"] = new SelectList(filteredBanquetMenu, "BanquetId", "BanquetName");
+            ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantName", booking.RestaurantId);
             ViewData["SittingId"] = new SelectList(_context.Sittings, "SittingId", "SittingId", booking.SittingId);
             ViewData["DefaultUserId"] = new SelectList(_context.Users, "Id", "Id", booking.DefaultUserId);
             return View(booking);

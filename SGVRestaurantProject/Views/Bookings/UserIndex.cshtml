@@ -52,6 +52,7 @@ Current Reservations.
                     @*<a asp-action="Edit" asp-route-id="@item.RestaurantId">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.RestaurantId">Details</a> |*@
                     <a asp-controller="Bookings" asp-action="Delete" asp-route-id="@item.BookingId">Delete</a>
+                    <a asp-controller="Bookings" asp-action="Edit" asp-route-id="@item.BookingId">Edit</a>
                 </td>
             </tr>
         }
