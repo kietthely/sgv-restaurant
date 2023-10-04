@@ -1,0 +1,26 @@
+﻿@model IEnumerable<SGVRestaurantProject.Models.UserPointsViewModel>
+
+<h1>Points Index</h1>
+
+<table class="table w-50">
+    <thead>
+        <tr>
+            <th>
+                User
+            </th>
+            <th>
+                Points
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FirstName @item.LastName</td>
+                <td>@item.NumberOfPoints</td>
+            </tr>
+            
+        }
+    </tbody>
+</table>
