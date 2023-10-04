@@ -20,6 +20,8 @@
                     <th scope="col">Sitting Times</th>
                     <th scope="col">Booked by</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Completed</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,6 +37,10 @@
                         <td>@booking.Sitting.SittingDuration</td>
                         <td>@booking.User.FirstName @booking.User.LastName</td>
                         <td>@booking.User.Email</td>
+                        <td>@booking.Completed</td>
+                        <td>
+                            <a class="btn btn-outline-secondary" asp-controller="Bookings" asp-action="Edit" asp-route-id="@booking.BookingId">Edit</a>
+                        </td>
                     </tr>
                 }
 

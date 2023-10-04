@@ -209,9 +209,15 @@ namespace SGVRestaurantProject.Controllers
                 return NotFound();
             }
             var restaurantId = booking.RestaurantId;
-            var currentUser = User.Identity.Name;
+
 
             var filteredRestaurant = _context.Restaurants.Where(r => r.RestaurantId == restaurantId).ToList();
+
+
+
+            var filteredUser = _context.Users
+                .Where(u => u.Id == booking.DefaultUserId).FirstOrDefault();
+            ViewBag.UserName = filteredUser.UserName;
 
             ViewBag.RestaurantName = filteredRestaurant.FirstOrDefault()?.RestaurantName;
             ViewBag.bookingDate = booking.BookingDate;
